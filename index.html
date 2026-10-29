@@ -352,7 +352,9 @@ Modo de edicao ativo. clique em qualquer texto para editar
 <section class="hero" id="hero">
  <div class="hero-foto-wrap">
  <div class="hero-foto" id="heroFoto" onclick="clicarFoto()">
- <img id="fotoImg" alt="Prof. Paulo Renk" src="foto.jpg" onerror="this.style.display='none';document.getElementById('fotoPlaceholder').style.display='flex'">
+ <img id="fotoImg" alt="Prof. Paulo Renk" src="foto.jpg"
+onload="this.style.display='block';document.getElementById('fotoPlaceholder').style.display='none'"
+onerror="this.style.display='none';document.getElementById('fotoPlaceholder').style.display='flex'">
  <div class="hero-foto-placeholder" id="fotoPlaceholder">
  <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
  <circle cx="26" cy="20" r="11" stroke="white" stroke-width="2"/>
