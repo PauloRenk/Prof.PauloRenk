@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prof. Paulo Renk — Matemática & Educação</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --verde:#2d4a35;
+  --verde-m:#3a6147;
+  --verde-l:#e8f0ea;
+  --verde-escuro:#1e3326;
+  --ouro:#c9a84c;
+  --ouro-l:#f5efd6;
+  --branco:#ffffff;
+  --cinza:#f3f5f3;
+  --texto:#1c2b1e;
+  --muted:#4a5e4d;
+  --borda:#c8d8ca;
+  --r:10px;
+}
+body{font-family:'Inter',sans-serif;color:var(--texto);background:#fff;font-size:16px;line-height:1.75}
+
+h1,h2,h3,h4{font-family:'Merriweather',serif;letter-spacing:0.01em}
+
+/* NAV */
+nav{background:var(--verde-escuro);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;position:fixed;top:0;left:0;right:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,0.22)}
+.logo{color:var(--ouro);font-family:'Merriweather',serif;font-size:1.2rem;font-weight:600;padding:1.1rem 0;letter-spacing:0.04em}
+.logo span{color:rgba(255,255,255,0.7);font-family:'Inter',sans-serif;font-weight:300;font-size:0.78rem;display:block;letter-spacing:0.1em;text-transform:uppercase;margin-top:1px}
+nav ul{list-style:none;display:flex;gap:0.2rem;flex-wrap:wrap}
+nav ul li a{color:rgba(255,255,255,0.8);text-decoration:none;padding:0.55rem 0.9rem;font-size:0.82rem;letter-spacing:0.02em;border-radius:5px;transition:all 0.2s;font-family:'Inter',sans-serif}
+nav ul li a:hover{color:#fff;background:rgba(255,255,255,0.08)}
+.btn-admin{background:transparent;border:1px solid var(--ouro) !important;color:var(--ouro) !important;cursor:pointer}
+.btn-agende{background:var(--ouro);color:var(--verde-escuro);border:none;padding:0.7rem 1.5rem;border-radius:8px;font-size:0.88rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:0.03em;white-space:nowrap;transition:all 0.2s;flex-shrink:0;box-shadow:0 2px 10px rgba(201,168,76,0.4)}
+.btn-agende:hover{background:#b8952f;box-shadow:0 4px 16px rgba(201,168,76,0.5);transform:translateY(-1px)}
+.btn-admin:hover{background:var(--ouro) !important;color:var(--verde-escuro) !important}
+
+/* HERO */
+.hero{background:linear-gradient(150deg,var(--verde-escuro) 0%,var(--verde) 60%,var(--verde-m) 100%);color:#fff;padding:7rem 3rem 5rem;display:flex;align-items:center;justify-content:center;gap:5rem;min-height:90vh;flex-wrap:wrap;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.hero-foto-wrap{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:0.75rem}
+.hero-foto{width:260px;height:300px;border-radius:140px 140px 120px 120px;background:var(--verde-m);border:3px solid var(--ouro);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(0,0,0,0.35);overflow:hidden;position:relative;cursor:pointer}
+.hero-foto img{width:100%;height:100%;object-fit:cover;display:none}
+.hero-foto-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;color:rgba(255,255,255,0.55);font-size:0.78rem;text-align:center;padding:1rem;font-family:'Inter',sans-serif;letter-spacing:0.05em;text-transform:uppercase}
+.hero-foto-placeholder svg{opacity:0.45}
+.foto-hint{font-size:0.72rem;color:var(--ouro);opacity:0.8;font-family:'Inter',sans-serif;letter-spacing:0.06em;text-transform:uppercase;display:none}
+.hero-txt{max-width:500px}
+.hero-badge{background:var(--ouro);color:var(--verde-escuro);font-size:0.7rem;font-weight:700;padding:0.3rem 1rem;border-radius:20px;letter-spacing:0.12em;display:inline-block;margin-bottom:1.3rem;text-transform:uppercase;font-family:'Inter',sans-serif}
+.hero h1{font-size:clamp(2.2rem,4vw,3.2rem);line-height:1.15;margin-bottom:0.5rem;color:#fff;font-weight:600}
+.hero h1 em{color:var(--ouro);font-style:italic}
+.hero-sub{font-size:1rem;color:rgba(255,255,255,0.78);margin:1rem 0 2rem;line-height:1.7;font-weight:300}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-p{background:var(--ouro);color:var(--verde-escuro);padding:0.8rem 1.8rem;border-radius:var(--r);font-weight:700;text-decoration:none;font-size:0.88rem;border:none;cursor:pointer;transition:all 0.2s;display:inline-block;letter-spacing:0.05em;font-family:'Inter',sans-serif;text-transform:uppercase}
+.btn-p:hover{background:#b8952f;transform:translateY(-1px)}
+.btn-s{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.4);padding:0.8rem 1.8rem;border-radius:var(--r);font-weight:300;text-decoration:none;font-size:0.88rem;transition:all 0.2s;cursor:pointer;display:inline-block;font-family:'Inter',sans-serif;letter-spacing:0.05em;text-transform:uppercase}
+.btn-s:hover{border-color:#fff;background:rgba(255,255,255,0.07)}
+.tags{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.5rem}
+.tag{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.85);font-size:0.75rem;padding:0.3rem 0.8rem;border-radius:20px;border:1px solid rgba(255,255,255,0.18);font-family:'Inter',sans-serif;letter-spacing:0.03em}
+
+/* SEÇÕES */
+section{padding:3.5rem 2rem;scroll-margin-top:70px}
+.container{max-width:1020px;margin:0 auto}
+.sec-titulo{text-align:center;margin-bottom:2.8rem}
+.sec-titulo h2{font-size:2.1rem;color:var(--verde-escuro);margin-bottom:0.5rem;font-weight:600}
+.sec-titulo p{color:var(--muted);max-width:560px;margin:0 auto;font-weight:300;font-size:0.95rem}
+.linha{width:50px;height:2px;background:var(--ouro);margin:0.8rem auto 0}
+
+/* SOBRE */
+.sobre{background:var(--cinza)}
+.sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+.sobre-txt h2{font-size:1.85rem;color:var(--verde-escuro);margin-bottom:1rem;font-weight:600}
+.sobre-txt p{color:var(--muted);margin-bottom:1rem;font-size:0.95rem;font-weight:300}
+.credenciais{margin-top:1.5rem;display:flex;flex-direction:column;gap:0.8rem}
+.cred-item{display:flex;align-items:center;gap:0.8rem;font-size:0.88rem;color:var(--texto)}
+.cred-icon{background:var(--verde);color:var(--ouro);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.82rem;flex-shrink:0}
+.nums{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.num-card{background:#fff;border-radius:var(--r);padding:1.5rem;text-align:center;box-shadow:0 2px 14px rgba(45,74,53,0.08);border:1px solid var(--borda)}
+.num-card .n{font-size:2.4rem;font-weight:600;color:var(--verde);font-family:'Merriweather',serif}
+.num-card .l{font-size:0.8rem;color:var(--muted);margin-top:0.2rem;letter-spacing:0.04em;text-transform:uppercase;font-weight:700}
+
+/* SERVIÇOS — grupos */
+.serv-grupo{background:#fff;border-radius:14px;padding:2rem;border:1px solid var(--borda);margin-bottom:1.5rem;transition:box-shadow 0.25s}
+.serv-grupo:hover{box-shadow:0 6px 24px rgba(45,74,53,0.1)}
+.serv-grupo-header{display:flex;gap:0;align-items:flex-start;margin-bottom:1.25rem}
+.serv-grupo-header.no-sub{margin-bottom:0}
+.serv-grupo-icon{font-size:2rem;flex-shrink:0;margin-top:0.1rem}
+.serv-grupo-header h3{font-size:1.25rem;color:var(--verde-escuro);font-weight:600;margin-bottom:0.35rem}
+.serv-grupo-header p{font-size:0.88rem;color:var(--muted);font-weight:300;line-height:1.65;margin:0}
+.serv-sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0.25rem}
+.serv-sub-card{background:var(--cinza);border-radius:10px;padding:1rem 1.2rem;border-left:3px solid var(--ouro)}
+.serv-sub-nivel{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--verde-m);margin-bottom:0.4rem;font-family:'Inter',sans-serif}
+.serv-sub-card p{font-size:0.84rem;color:var(--muted);font-weight:300;line-height:1.55;margin:0}
+.serv-vest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.85rem;margin-top:0.25rem}
+.serv-vest-card{background:var(--cinza);border-radius:10px;padding:0.9rem 1rem;display:flex;flex-direction:column;gap:0.25rem}
+.serv-vest-card strong{font-size:0.92rem;color:var(--verde-escuro);font-family:'Merriweather',serif;font-weight:700}
+.serv-vest-card span{font-size:0.78rem;color:var(--muted);font-weight:300;line-height:1.45}
+.serv-vest-destaque{border:1px solid var(--ouro);background:var(--ouro-l)}
+.serv-vest-wide{grid-column:1/-1}
+.vest-logo{width:28px;height:28px;border-radius:50%;background:var(--verde);color:var(--ouro);font-family:'Merriweather',serif;font-size:1rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:0.25rem;flex-shrink:0}
+.serv-futuro{background:var(--verde-l);border:1px dashed var(--verde-m);border-radius:10px;padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:0.5rem}
+.serv-futuro-badge{background:var(--verde-m);color:#fff;font-size:0.7rem;font-weight:700;padding:0.25rem 0.7rem;border-radius:20px;letter-spacing:0.08em;text-transform:uppercase;font-family:'Inter',sans-serif;white-space:nowrap}
+.serv-futuro p{font-size:0.87rem;color:var(--verde-escuro);margin:0;font-weight:300}
+.serv-futuro strong{font-weight:700}
+.si-insta{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.si-tiktok{background:#010101}
+.si-lattes{background:#1a5276}
+.info-icon-txt{background:var(--verde);color:var(--ouro);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;flex-shrink:0;font-family:'Inter',sans-serif}
+.si-linkedin{background:#0077B5}
+.si-insta{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.si-tiktok{background:#000}
+.si-lattes{background:#2d4a35}
+.info-icon-txt{background:var(--verde);color:var(--ouro);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;flex-shrink:0;font-family:'Inter',sans-serif;letter-spacing:0}
+
+.serv-sub-card-destaque{border-left:3px solid var(--verde);background:var(--verde-l)}
+
+/* DEPOIMENTOS */
+.depoimentos{background:var(--verde-escuro)}
+.depoimentos .sec-titulo h2{color:#fff}
+.depoimentos .sec-titulo p{color:rgba(255,255,255,0.6)}
+.dep-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.dep-card{background:rgba(255,255,255,0.07);border-radius:var(--r);padding:1.5rem;border:1px solid rgba(255,255,255,0.1);color:#fff}
+.dep-texto{font-size:0.92rem;line-height:1.7;color:rgba(255,255,255,0.85);margin-bottom:1rem;font-style:italic;font-family:'Merriweather',serif;font-size:1.05rem}
+.dep-autor{display:flex;align-items:center;gap:0.75rem}
+.dep-av{width:38px;height:38px;border-radius:50%;background:var(--ouro);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.82rem;color:var(--verde-escuro);flex-shrink:0;font-family:'Inter',sans-serif}
+.dep-nome{font-size:0.85rem;font-weight:700;font-family:'Inter',sans-serif}
+.dep-role{font-size:0.75rem;color:rgba(255,255,255,0.55);font-weight:300}
+.estrelas{color:var(--ouro);font-size:0.85rem;margin-bottom:0.6rem;letter-spacing:2px}
+
+/* CONTATO */
+.contato{background:var(--cinza)}
+.contato-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+.contato-info h3{font-size:1.35rem;color:var(--verde-escuro);margin-bottom:1rem;font-family:'Merriweather',serif;font-weight:600}
+.contato-info p{color:var(--muted);margin-bottom:1.5rem;font-size:0.9rem;font-weight:300}
+.info-items{display:flex;flex-direction:column;gap:1rem}
+.info-item{display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;color:var(--texto)}
+.info-icon{background:var(--verde);color:var(--ouro);width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:0.75rem;color:var(--muted);margin-bottom:0.4rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:0.75rem 1rem;border:1px solid var(--borda);border-radius:8px;font-size:0.9rem;font-family:'Inter',sans-serif;background:#fff;color:var(--texto);transition:border 0.2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--verde-m);box-shadow:0 0 0 3px rgba(58,97,71,0.1)}
+.form-group textarea{resize:vertical;min-height:110px}
+.form-submit{width:100%;background:var(--verde);color:#fff;border:none;padding:0.9rem;border-radius:var(--r);font-size:0.88rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.2s;margin-top:0.5rem;letter-spacing:0.08em;text-transform:uppercase}
+.form-submit:hover{background:var(--verde-m)}
+
+/* FOOTER */
+footer{background:var(--verde-escuro);color:rgba(255,255,255,0.55);text-align:center;padding:2rem;font-size:0.82rem;font-family:'Inter',sans-serif;letter-spacing:0.04em}
+footer strong{color:var(--ouro)}
+
+/* MODO EDIÇÃO */
+.modo-edicao-banner{display:none;background:var(--ouro);color:var(--verde-escuro);text-align:center;padding:0.65rem 1rem;font-size:0.8rem;font-weight:700;position:fixed;top:62px;left:0;right:0;z-index:99;flex-wrap:wrap;gap:0.5rem;justify-content:center;align-items:center;letter-spacing:0.05em;font-family:'Inter',sans-serif;text-transform:uppercase}
+.modo-edicao-banner.ativo{display:flex}
+.banner-btn{border:none;padding:0.3rem 1rem;border-radius:5px;cursor:pointer;font-size:0.75rem;font-weight:700;font-family:'Inter',sans-serif;letter-spacing:0.05em;text-transform:uppercase;transition:all 0.2s}
+.banner-btn-salvar{background:var(--verde-escuro);color:#fff}
+.banner-btn-salvar:hover{background:#000}
+.banner-btn-preview{background:#fff;color:var(--verde-escuro);border:1px solid var(--verde-escuro)}
+.banner-btn-preview:hover{background:var(--verde-l)}
+.banner-btn-sair{background:transparent;color:var(--verde-escuro);border:1px solid var(--verde-escuro)}
+.banner-btn-sair:hover{background:rgba(0,0,0,0.08)}
+
+[contenteditable="true"]{outline:2px dashed rgba(201,168,76,0.7);outline-offset:3px;border-radius:3px;cursor:text;min-width:10px}
+[contenteditable="true"]:focus{outline:2px solid var(--verde-m);background:rgba(201,168,76,0.06)}
+body.modo-edicao-ativo [contenteditable="true"]:empty::before{content:'Clique para editar';color:rgba(0,0,0,0.3);font-style:italic}
+
+/* FOTO UPLOAD */
+.hero-foto{cursor:default}
+.foto-hint{display:none}
+body.modo-edicao-ativo .hero-foto{cursor:pointer}
+body.modo-edicao-ativo .hero-foto:hover{border-color:#fff;opacity:0.9}
+body.modo-edicao-ativo .foto-hint{display:block}
+#fotoInput{display:none}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;align-items:center;justify-content:center}
+.modal-overlay.ativo{display:flex}
+.login-modal{background:#fff;border-radius:14px;padding:2.5rem;width:min(380px,92vw);text-align:center;box-shadow:0 24px 70px rgba(0,0,0,0.3)}
+.login-modal .lock-icon{font-size:2.8rem;margin-bottom:0.75rem}
+.login-modal h2{color:var(--verde-escuro);margin-bottom:0.4rem;font-size:1.6rem;font-weight:600}
+.login-modal p{color:var(--muted);font-size:0.88rem;margin-bottom:1.5rem;font-weight:300}
+.login-modal input{width:100%;padding:0.75rem 1rem;border:1px solid var(--borda);border-radius:8px;font-size:1rem;margin-bottom:0.75rem;text-align:center;letter-spacing:0.2em;font-family:'Inter',sans-serif;transition:border 0.2s}
+.login-modal input:focus{outline:none;border-color:var(--verde-m);box-shadow:0 0 0 3px rgba(58,97,71,0.1)}
+.login-erro{color:#c0392b;font-size:0.82rem;margin-bottom:0.8rem;display:none;font-weight:700}
+.btn-entrar{background:var(--verde);color:#fff;border:none;padding:0.75rem 1.5rem;border-radius:8px;font-size:0.88rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;width:100%;transition:background 0.2s;letter-spacing:0.07em;text-transform:uppercase}
+.btn-entrar:hover{background:var(--verde-m)}
+.btn-cancel{background:none;border:none;color:var(--muted);font-size:0.82rem;margin-top:0.75rem;cursor:pointer;width:100%;font-family:'Inter',sans-serif}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--verde-escuro);color:#fff;padding:0.9rem 1.5rem;border-radius:10px;font-size:0.85rem;z-index:2000;transform:translateY(100px);opacity:0;transition:all 0.3s;box-shadow:0 4px 20px rgba(0,0,0,0.25);font-family:'Inter',sans-serif;max-width:320px;line-height:1.5}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* SOCIAL FLOAT (barra lateral esquerda) */
+.social-float{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:200;display:flex;flex-direction:column;gap:0;border-radius:12px 0 0 12px;overflow:hidden;box-shadow:-3px 3px 18px rgba(0,0,0,0.22)}
+.social-float a{display:flex;align-items:center;justify-content:center;width:46px;height:46px;transition:all 0.22s;text-decoration:none}
+.social-float a:hover{width:56px}
+.sf-wpp{background:#25D366}
+.sf-email{background:var(--verde-escuro)}
+.sf-linkedin{background:#0077B5}
+.sf-yt{background:#FF0000}
+.social-float svg{width:22px;height:22px;fill:#fff;flex-shrink:0}
+
+/* SOCIAL ICONS inline (contato + footer) */
+.social-icons{display:flex;gap:0.75rem;margin-top:1.25rem}
+.social-icons a{display:flex;align-items:center;gap:0.5rem;padding:0.55rem 1rem;border-radius:8px;text-decoration:none;font-size:0.82rem;font-weight:700;font-family:'Inter',sans-serif;letter-spacing:0.05em;text-transform:uppercase;transition:all 0.2s;color:#fff}
+.social-icons a:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.si-wpp{background:#25D366}
+.si-email{background:var(--verde)}
+.si-linkedin{background:#0077B5}
+.si-yt{background:#FF0000}
+.social-icons svg{width:17px;height:17px;fill:#fff;flex-shrink:0}
+
+/* FOOTER SOCIAL */
+.footer-social{display:flex;justify-content:center;gap:1rem;margin-top:1rem}
+.footer-social a{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.2s;text-decoration:none}
+.footer-social a:hover{transform:translateY(-3px);filter:brightness(1.15)}
+.footer-social svg{width:18px;height:18px;fill:#fff}
+
+/* ==============================
+   RESPONSIVO — MOBILE
+   ============================== */
+
+/* NAV mobile: menu hamburguer */
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:0.5rem;background:none;border:none}
+.nav-toggle span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s}
+.nav-toggle.aberto span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.nav-toggle.aberto span:nth-child(2){opacity:0}
+.nav-toggle.aberto span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+@media(max-width:768px){
+
+  /* NAV */
+  nav{padding:0 1rem;position:relative}
+  .btn-agende{display:none}
+  .nav-toggle{display:flex}
+  nav ul{
+    display:none;flex-direction:column;gap:0;
+    position:absolute;top:100%;left:0;right:0;
+    background:var(--verde-escuro);
+    padding:0.5rem 0 1rem;
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+    z-index:99
+  }
+  nav ul.aberto{display:flex}
+  nav ul li a{padding:0.75rem 1.5rem;border-radius:0;display:block;font-size:0.9rem}
+  .btn-admin{margin:0.5rem 1.5rem 0;display:inline-block;text-align:center}
+
+  /* HERO */
+  .hero{
+    flex-direction:column;
+    padding:3rem 1.5rem 3.5rem;
+    gap:2rem;
+    min-height:auto;
+    text-align:center
+  }
+  .hero-foto{width:180px;height:210px}
+  .hero h1{font-size:1.9rem}
+  .hero-sub{font-size:0.95rem}
+  .hero-btns{justify-content:center}
+  .tags{justify-content:center}
+  .hero-foto-wrap{order:-1}
+
+  /* SEÇÕES */
+  section{padding:3rem 1.2rem}
+  .sec-titulo h2{font-size:1.6rem}
+
+  /* SOBRE */
+  .sobre-grid{grid-template-columns:1fr}
+  .nums{grid-template-columns:1fr 1fr}
+
+  /* SERVIÇOS */
+  .serv-grupo{padding:1.5rem}
+  .serv-grupo-header{flex-direction:column;gap:0.75rem}
+  .serv-vest-grid{grid-template-columns:1fr 1fr}
+  .serv-vest-wide{grid-column:1/-1}
+  .serv-sub-grid{grid-template-columns:1fr}
+
+  /* DEPOIMENTOS */
+  .dep-grid{grid-template-columns:1fr}
+
+  /* CONTATO */
+  .contato-grid{grid-template-columns:1fr}
+  .social-icons{flex-wrap:wrap}
+
+  /* FOOTER */
+  .footer-social{gap:0.75rem}
+
+  /* MODO EDIÇÃO BANNER */
+  .modo-edicao-banner{top:0;position:relative}
+
+  /* SOCIAL FLOAT — esconde no mobile */
+  .social-float{display:none}
+}
+
+@media(max-width:480px){
+  .hero h1{font-size:1.6rem}
+  .hero-foto{width:150px;height:175px}
+  .serv-vest-grid{grid-template-columns:1fr}
+  .nums{grid-template-columns:1fr 1fr}
+  .hero-btns{flex-direction:column;align-items:center}
+  .btn-p,.btn-s{width:100%;text-align:center}
+}
+
+</style>
+</head>
+<body>
+
+<!-- INPUT FOTO (oculto) -->
+<input type="file" id="fotoInput" accept="image/*">
+
+<!-- BARRA SOCIAL FLUTUANTE -->
+<div class="social-float">
+ <a class="sf-wpp" href="https://wa.me/5511943870101" target="_blank" rel="noopener" title="WhatsApp">
+ <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+ </a>
+ <a class="sf-linkedin" href="https://br.linkedin.com/in/paulo-rog%C3%A9rio-renk-8a2861b9" target="_blank" rel="noopener" title="LinkedIn">
+ <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#fff"/></svg>
+ </a>
+ <a class="sf-email" href="mailto:professorrenk@gmail.com" title="E-mail">
+ <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+ </a>
+ <a class="sf-yt" href="https://youtube.com/@paulorenk" target="_blank" title="YouTube">
+ <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+ </a>
+</div>
+
+<!-- BANNER MODO EDIÇÃO -->
+<div class="modo-edicao-banner" id="modoBanner">
+Modo de edicao ativo. clique em qualquer texto para editar
+ <button class="banner-btn banner-btn-salvar" onclick="salvarTudo()"> Salvar</button>
+ <button class="banner-btn banner-btn-preview" onclick="verComoVisitante()"> Ver como visitante</button>
+ <button class="banner-btn banner-btn-sair" onclick="sairEdicao()">Sair</button>
+</div>
+
+<!-- NAV -->
+<nav>
+ <div class="logo">Prof. Paulo Renk <span>Matemática &amp; Educação</span></div>
+ <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Menu">
+ <span></span><span></span><span></span>
+ </button>
+ <ul id="navMenu">
+ <li><a href="#sobre">Sobre</a></li>
+ <li><a href="#servicos">Serviços</a></li>
+ <li><a href="#depoimentos">Depoimentos</a></li>
+ <li><a href="#contato">Contato</a></li>
+ <li><a class="btn-admin" onclick="abrirLogin()"> Admin</a></li>
+ </ul>
+ <button class="btn-agende" id="btnAgendeTopo">Agende sua aula</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+ <div class="hero-foto-wrap">
+ <div class="hero-foto" id="heroFoto" onclick="clicarFoto()">
+ <img id="fotoImg" alt="Prof. Paulo Renk" src="foto.jpg" onerror="this.style.display='none';document.getElementById('fotoPlaceholder').style.display='flex'">
+ <div class="hero-foto-placeholder" id="fotoPlaceholder">
+ <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <circle cx="26" cy="20" r="11" stroke="white" stroke-width="2"/>
+ <path d="M6 44c0-11 9-18 20-18s20 7 20 18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+ </svg>
+ 
+ </div>
+ </div>
+ <span class="foto-hint"> Clique para adicionar foto</span>
+ </div>
+ <div class="hero-txt">
+ <div class="hero-badge">Aulas individuais e turmas particulares</div>
+ <h1><span id="heroTitulo">Prof. <em>Paulo Renk</em><br>Matemática que transforma</span></h1>
+ <p class="hero-sub" id="heroSub">Doutor em Educação Matemática com vasta experiência no Ensino Básico em colégios privados da grande São Paulo. Atendimento individual ou em turmas.</p>
+ <div class="tags">
+ <span class="tag"> Aulas individuais ou em grupo</span>
+ <span class="tag"> Concurso Público</span>
+ <span class="tag"> ENEM · FUVEST · MACK</span>
+ <span class="tag"> Olimpíadas de Matemática</span>
+ </div>
+ </div>
+</section>
+
+<!-- SOBRE -->
+<section class="sobre" id="sobre">
+ <div class="container">
+ <div class="sobre-grid">
+ <div class="sobre-txt">
+ <h2 id="sobreTitulo">Quem é o Prof. Paulo Renk?</h2>
+ <p id="sobreP1">Doutor em Educação Matemática pela UNIAN (2024), com Tese na área de Formação de Professores no estudo do Pensamento Computacional. Mestrado também em Educação Matemática, com Dissertação na área de Ensino e Aprendizagem em Matemática e suas Tecnologias, no estudo de Funções por meio de um software dinâmico. Com especialização em Educação Especial e Inclusiva e experiência no atendimento cotidiano de alunos incluídos em sala de aula.</p>
+ <p id="sobreP2">Bacharel em Engenharia Civil e Licenciado em Matemática com mais de 35 anos de experiência, sendo os últimos anos dedicados integralmente ao ensino de Matemática em colégios reconhecidos de São Paulo, com atuação na graduação e na pós-graduação de professores. Atuei no Colégio Agostiniano São José por 5 anos, no Colégio Nobilis no pré-vestibular e como professor de pós-graduação no CENAED por 8 anos.</p>
+ <div class="credenciais">
+ <div class="cred-item"><span id="cred1">Doutorado em Educação Matemática. UNIAN (2024)</span></div>
+ <div class="cred-item"><span>Licenciatura em Matemática. FALC (2019)</span></div>
+ <div class="cred-item"><span id="cred2">Mestrado em Educação Matemática. UNIAN (2016)</span></div>
+ <div class="cred-item"><span id="cred3">Especialização em Educação Especial e Inclusiva</span></div>
+ <div class="cred-item"><span id="cred4">Engenharia Civil. UNIBAN (2001)</span></div>
+ </div>
+ </div>
+ <div class="nums">
+ <div class="num-card"><div class="n" id="n1">Dr.</div><div class="l">Educação Matemática</div></div>
+ <div class="num-card"><div class="n" id="n2">35+</div><div class="l">Anos de experiência</div></div>
+ <div class="num-card"><div class="n" id="n3">5+</div><div class="l">Anos no Agostiniano</div></div>
+ <div class="num-card"><div class="n" id="n4">8+</div><div class="l">Anos na pós-graduação</div></div>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+ <div class="container">
+ <div class="sec-titulo">
+ <h2 id="servTitulo">O que ofereço</h2>
+ <p id="servSub">Atendimento exclusivo em Matemática com material próprio, metodologia personalizada e suporte em todas as etapas de ensino.</p>
+ <div class="linha"></div>
+ </div>
+
+ <!-- GRUPO 1: REFORÇO ESCOLAR -->
+ <div class="serv-grupo">
+ <div class="serv-grupo-header">
+ 
+ <div>
+ <h3>Aula de Reforço Escolar</h3>
+ <p>Acompanhamento contínuo com o uso do próprio material usado no colégio, complementado por meio de um material didático próprio e exercícios direcionados para quem quer manter o ritmo ou recuperar o aprendizado perdido.</p>
+ </div>
+ </div>
+ <div class="serv-sub-grid">
+ <div class="serv-sub-card">
+ <span class="serv-sub-nivel">Anos Finais</span>
+ <p>6º ao 9º ano dos Anos Finais do Ensino Fundamental: proposta com base sólida nas cinco unidades temáticas de Matemática trazidas na BNCC: Números, Álgebra, Geometria, Grandezas e Medidas, e Probabilidade e Estatística. Foco em dar continuidade ao pensamento algébrico e estatístico construído nos Anos Iniciais.</p>
+ </div>
+ <div class="serv-sub-card">
+ <span class="serv-sub-nivel">Ensino Médio</span>
+ <p>1º ao 3º ano do Ensino Médio: proposta com base sólida nas cinco Áreas e Eixos Integrados de Matemática e suas Tecnologias trazidos na BNCC: Aritmética, Álgebra, Geometria (Plana, Espacial e Analítica), Estatística e Probabilidade e Matemática Financeira. Foco no aprofundamento, consolidação e aplicação dos conceitos em contextos reais, sociais e tecnológicos.</p>
+ </div>
+ </div>
+ </div>
+
+ <!-- GRUPO 2: PRÉ-PROVA / RECUPERAÇÃO -->
+ <div class="serv-grupo">
+ <div class="serv-grupo-header no-sub">
+ 
+ <div>
+ <h3>Pré-prova &amp; Recuperação</h3>
+ <p>Apoio focado em resultados rápidos, olhando para os conceitos e exercícios na véspera de avaliações ou durante períodos de recuperação. Trabalharemos por meio da revisão dos tópicos cruciais do conteúdo, esclarecimento de dúvidas e resolução de exercícios usando modelo de provas anteriores e suas variantes, para dar segurança e destravar o raciocínio.</p>
+ </div>
+ </div>
+ </div>
+
+ <!-- GRUPO 3: PREPARATÓRIOS VESTIBULARES -->
+ <div class="serv-grupo">
+ <div class="serv-grupo-header">
+ 
+ <div>
+ <h3>Preparatórios para Vestibulares</h3>
+ <p>Para cada destino, faço o levantamento dos conteúdos envolvidos e preparo material específico para aquela prova. Sem conteúdo desperdiçado.</p>
+ </div>
+ </div>
+ <div class="serv-vest-grid">
+ <div class="serv-vest-card serv-vest-destaque">
+ <div class="vest-logo">E</div>
+ <strong>ENEM</strong>
+ <span>Redação não. mas tudo em Matemática e suas tecnologias</span>
+ </div>
+ <div class="serv-vest-card serv-vest-destaque">
+ <div class="vest-logo">F</div>
+ <strong>FUVEST</strong>
+ <span>USP. alto nível, conteúdo aprofundado</span>
+ </div>
+ <div class="serv-vest-card">
+ <div class="vest-logo">M</div>
+ <strong>Mackenzie</strong>
+ <span>Preparação alinhada ao perfil e exigências da prova do Mackenzie.</span>
+ </div>
+ <div class="serv-vest-card">
+ <div class="vest-logo">F</div>
+ <strong>FEI</strong>
+ <span>Preparação alinhada ao perfil e exigências da prova da FEI.</span>
+ </div>
+ <div class="serv-vest-card">
+ <div class="vest-logo">A</div>
+ <strong>Fund. ABC</strong>
+ <span>Conteúdo alinhado ao edital específico.</span>
+ </div>
+ <div class="serv-vest-card">
+ <div class="vest-logo">U</div>
+ <strong>USCS</strong>
+ <span>Conteúdo alinhado ao edital específico</span>
+ </div>
+ <div class="serv-vest-card">
+ <div class="vest-logo">M</div>
+ <strong>Mauá</strong>
+ <span>Preparação alinhada ao perfil e exigências da prova da Mauá.</span>
+ </div>
+ <div class="serv-vest-card">
+ <div class="vest-logo">P</div>
+ <strong>PUC</strong>
+ <span>Preparação alinhada ao perfil e exigências da prova da PUC</span>
+ </div>
+ <div class="serv-vest-card serv-vest-wide">
+ <div class="vest-logo">+</div>
+ <strong>Outras Universidades</strong>
+ <span>Qualquer vestibular ou processo seletivo: basta informar que montamos um plano.</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- GRUPO 4: OLIMPÍADAS E CONCURSOS -->
+ <div class="serv-grupo">
+ <div class="serv-grupo-header">
+ 
+ <div>
+ <h3>Preparatório para Concursos Públicos &amp; Olimpíadas</h3>
+ <p>Preparação séria para quem quer conquistar uma vaga em concurso público ou se destacar nas olimpíadas de Matemática. Conteúdo sob medida para cada edital ou competição. Raciocínio Lógico, Matemática Financeira e Técnicas de Resolução de Problemas de alto nível.</p>
+ </div>
+ </div>
+ <div class="serv-sub-grid">
+ <div class="serv-sub-card">
+ <span class="serv-sub-nivel">Olimpíadas de Matemática</span>
+ <p>OBMEP, OBM e demais competições. Iniciante ao avançado com treino de Técnicas de Resolução de Problemas.</p>
+ </div>
+ <div class="serv-sub-card serv-sub-card-destaque">
+ <span class="serv-sub-nivel">Concurso Público</span>
+ <p>Preparação completa em Matemática e Raciocínio Lógico para quem mira uma vaga no serviço público. Conteúdo 100% alinhado ao edital.</p>
+ </div>
+ </div>
+ </div>
+
+ <!-- GRUPO 5: ATENDIMENTO EDUCACIONAL ESPECIALIZADO -->
+ <div class="serv-grupo">
+ <div class="serv-grupo-header">
+ 
+ <div>
+ <h3>Atendimento Educacional Especializado</h3>
+ <p>Aprendizado no ritmo do aluno, com material adaptado, acompanhamento próximo e suporte específico para provas e questões sob demanda.</p>
+ </div>
+ </div>
+ <div class="serv-sub-grid">
+ <div class="serv-sub-card">
+ <span class="serv-sub-nivel">Anos Finais</span>
+ <p>Material reforçado e metodologia adaptada para alunos do 6º ao 9º ano com necessidades específicas de aprendizagem.</p>
+ </div>
+ <div class="serv-sub-card">
+ <span class="serv-sub-nivel">Ensino Médio</span>
+ <p>Suporte especializado com abordagem individualizada para alunos do Ensino Médio que precisam de atenção além do padrão.</p>
+ </div>
+ </div>
+ </div>
+
+ <!-- NOTA FUTURA -->
+ <div class="serv-futuro">
+ <p><strong>Ensino Superior: Engenharias</strong> &nbsp; Atendimento a alunos de graduação nas disciplinas de Cálculo, Álgebra Linear e Matemática Aplicada.</p>
+ </div>
+
+ </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="depoimentos" id="depoimentos">
+ <div class="container">
+ <div class="sec-titulo">
+ <h2>O que dizem meus alunos</h2>
+ <p>Resultados reais de quem passou pelas minhas aulas</p>
+ <div class="linha"></div>
+ </div>
+ <div class="dep-grid">
+ <div class="dep-card">
+ <div class="estrelas">★★★★★</div>
+ <p class="dep-texto" id="dep1t">"Meu filho estava reprovando em matemática no 2º ano do ensino médio. Em 4 meses com o Prof. Paulo Renk, ele tirou 8,5 na prova final. Recomendo com os olhos fechados!"</p>
+ <div class="dep-autor"><div class="dep-av">ML</div><div><div class="dep-nome" id="dep1n">Maria Lúcia</div><div class="dep-role">Mãe de aluno, São Paulo</div></div></div>
+ </div>
+ <div class="dep-card">
+ <div class="estrelas">★★★★★</div>
+ <p class="dep-texto" id="dep2t">"Passei na UNICAMP depois de 2 anos tentando! O Prof. Paulo tem um jeito de explicar que finalmente fez tudo fazer sentido pra mim. Método incrível."</p>
+ <div class="dep-autor"><div class="dep-av">GS</div><div><div class="dep-nome" id="dep2n">Gabriel Souza</div><div class="dep-role">Estudante, aprovado na UNICAMP</div></div></div>
+ </div>
+ <div class="dep-card">
+ <div class="estrelas">★★★★★</div>
+ <p class="dep-texto" id="dep3t">"Contratamos o Prof. Paulo para um treinamento em análise de dados para nossa equipe de 12 pessoas. Excelente didática, conteúdo prático e muita segurança no que ensina."</p>
+ <div class="dep-autor"><div class="dep-av">RC</div><div><div class="dep-nome" id="dep3n">Rafael Costa</div><div class="dep-role">Gerente de RH, empresa de tecnologia</div></div></div>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contato" id="contato">
+ <div class="container">
+ <div class="sec-titulo">
+ <h2 id="contTitulo">Vamos conversar?</h2>
+ <p id="contSub">Aula experimental gratuita de 30 minutos para novos alunos. Entre em contato!</p>
+ <div class="linha"></div>
+ </div>
+ <div class="contato-grid">
+ <div class="contato-info">
+ <h3>Informações de contato</h3>
+ <p id="contDesc">Atendo presencialmente em São Paulo e online para todo o Brasil. Respondo em até 24 horas.</p>
+ <div class="info-items">
+          <div class="info-item"><div class="info-icon-txt">WA</div><span id="contTel">WhatsApp: (11) 94387-0101</span></div>
+          <div class="info-item"><div class="info-icon-txt">@</div><span id="contEmail">professorrenk@gmail.com</span></div>
+          <div class="info-item"><div class="info-icon-txt">IG</div><span>@professor.renk_math</span></div>
+          <div class="info-item"><div class="info-icon-txt">TK</div><span>@professor.renk_math</span></div>
+          <div class="info-item"><div class="info-icon-txt">in</div><a href="https://br.linkedin.com/in/paulo-rog%C3%A9rio-renk-8a2861b9" target="_blank" rel="noopener" style="color:var(--texto);text-decoration:none">LinkedIn: Paulo Rogério Renk</a></div>
+          <div class="info-item"><div class="info-icon-txt">CV</div><a href="http://lattes.cnpq.br/5580522778966273" target="_blank" rel="noopener" style="color:var(--texto);text-decoration:none">Currículo Lattes</a></div>
+          <div class="info-item"><div class="info-icon-txt">H</div><span id="contHorario">Seg a Sex: 7h30 às 21h00 &nbsp;|&nbsp; Sábado: 7h30 às 14h00</span></div>
+          <div class="info-item"><div class="info-icon-txt">SP</div><span id="contLocal">São Paulo, SP. Atendimento online e presencial</span></div>
+        </div>
+        <div class="social-icons" style="margin-top:1.5rem;flex-wrap:wrap">
+          <a class="si-wpp" href="https://wa.me/5511943870101" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#fff"/></svg> WhatsApp</a>
+          <a class="si-email" href="mailto:professorrenk@gmail.com"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="#fff"/></svg> E-mail</a>
+          <a class="si-linkedin" href="https://br.linkedin.com/in/paulo-rog%C3%A9rio-renk-8a2861b9" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#fff"/></svg> LinkedIn</a>
+          <a class="si-insta" href="https://instagram.com/professor.renk_math" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="#fff"/></svg> Instagram</a>
+          <a class="si-tiktok" href="https://tiktok.com/@professor.renk_math" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z" fill="#fff"/></svg> TikTok</a>
+          <a class="si-yt" href="https://youtube.com/@paulorenk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#fff"/></svg> YouTube</a>
+          <a class="si-lattes" href="http://lattes.cnpq.br/5580522778966273" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="#fff"/></svg> Lattes</a>
+        </div>
+ </div>
+ <div>
+ <div class="form-group"><label>Seu nome</label><input type="text" placeholder="Como posso te chamar?"></div>
+ <div class="form-group"><label>E-mail ou WhatsApp</label><input type="text" placeholder="Para eu te responder"></div>
+ <div class="form-group"><label>Perfil</label>
+ <select>
+ <option>Sou pai/mãe de aluno</option>
+ <option>Sou estudante</option>
+ <option>Sou empresa/RH</option>
+ <option>Outro</option>
+ </select>
+ </div>
+ <div class="form-group"><label>Mensagem</label><textarea placeholder="Me conte o que você precisa.."></textarea></div>
+ <button class="form-submit" onclick="window.open('https://wa.me/5511943870101?text=Olá%2C%20Prof.%20Paulo%20Renk!%20Gostaria%20de%20agendar%20uma%20aula.','_blank')">Falar no WhatsApp →</button>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+ <strong>Prof. Paulo Renk</strong>. Matemática &amp; Educação<br>
+ <div class="footer-social">
+ <a class="sf-wpp" href="https://wa.me/5511943870101" target="_blank" rel="noopener" title="WhatsApp" style="background:#25D366">
+ <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#fff"/></svg>
+ </a>
+ <a class="sf-linkedin" href="https://br.linkedin.com/in/paulo-rog%C3%A9rio-renk-8a2861b9" target="_blank" rel="noopener" title="LinkedIn" style="background:#0077B5">
+ <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#fff"/></svg>
+ </a>
+ <a class="sf-email" href="mailto:professorrenk@gmail.com" title="E-mail" style="background:#2d4a35">
+ <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="#fff"/></svg>
+ </a>
+ <a class="sf-yt" href="https://youtube.com/@paulorenk" target="_blank" title="YouTube" style="background:#FF0000">
+ <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#fff"/></svg>
+ </a>
+ </div>
+ <span style="margin-top:0.75rem;display:block">© 2025 · Todos os direitos reservados</span>
+</footer>
+
+<!-- MODAL LOGIN -->
+<div class="modal-overlay" id="loginModal">
+ <div class="login-modal">
+ <div class="lock-icon"></div>
+ <h2>Área do Professor</h2>
+ <p>Digite a senha para editar o site</p>
+ <input type="password" id="senhaInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')verificarSenha()">
+ <div class="login-erro" id="loginErro">Senha incorreta. Tente novamente.</div>
+ <button class="btn-entrar" onclick="verificarSenha()">Entrar</button>
+ <button class="btn-cancel" onclick="fecharLogin()">Cancelar</button>
+ </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ==============================
+// CONFIGURAÇÃO. altere aqui
+// ==============================
+const SENHA = "paulo2025";
+
+const EDITAVEIS = [
+ 'heroTitulo','heroSub',
+ 'sobreTitulo','sobreP1','sobreP2',
+ 'cred1','cred2','cred3','cred4',
+ 'n1','n2','n3','n4',
+ 'servTitulo','servSub',
+ 's1t','s1d','s2t','s2d','s3t','s3d',
+ 's4t','s4d','s5t','s5d','s6t','s6d',
+ 'dep1t','dep1n','dep2t','dep2n','dep3t','dep3n',
+ 'contTitulo','contSub','contDesc',
+ 'contTel','contEmail','contLocal','contHorario'
+];
+
+// ==============================
+// LOGIN
+// ==============================
+function abrirLogin(){
+ document.getElementById('loginModal').classList.add('ativo');
+ document.getElementById('senhaInput').value = '';
+ document.getElementById('loginErro').style.display = 'none';
+ setTimeout(()=>document.getElementById('senhaInput').focus(), 100);
+}
+function fecharLogin(){
+ document.getElementById('loginModal').classList.remove('ativo');
+}
+function verificarSenha(){
+ const v = document.getElementById('senhaInput').value;
+ if(v === SENHA){ fecharLogin(); ativarEdicao(); }
+ else {
+ document.getElementById('loginErro').style.display = 'block';
+ document.getElementById('senhaInput').value = '';
+ document.getElementById('senhaInput').focus();
+ }
+}
+document.getElementById('loginModal').addEventListener('click', function(e){
+ if(e.target === this) fecharLogin();
+});
+
+// ==============================
+// EDIÇÃO
+// ==============================
+function ativarEdicao(){
+ document.getElementById('modoBanner').classList.add('ativo');
+ document.body.classList.add('modo-edicao-ativo');
+ EDITAVEIS.forEach(id => {
+ const el = document.getElementById(id);
+ if(el) el.contentEditable = 'true';
+ });
+ mostrarToast(' Edição ativa! Clique em qualquer texto para editar.\nFoto: clique na imagem do hero.');
+}
+
+function sairEdicao(){
+ document.getElementById('modoBanner').classList.remove('ativo');
+ document.body.classList.remove('modo-edicao-ativo');
+ EDITAVEIS.forEach(id => {
+ const el = document.getElementById(id);
+ if(el) el.contentEditable = 'false';
+ });
+ mostrarToast('Modo de edição encerrado.');
+}
+
+// "Ver como visitante": salva, sai da edição e rola ao topo
+function verComoVisitante(){
+ salvarTudo(false);
+ sairEdicao();
+ window.scrollTo({top:0, behavior:'smooth'});
+ mostrarToast(' Visualizando como visitante. Clique em Admin para voltar a editar.');
+}
+
+// ==============================
+// FOTO
+// ==============================
+function clicarFoto(){
+ if(!document.body.classList.contains('modo-edicao-ativo')) return;
+ document.getElementById('fotoInput').click();
+}
+document.getElementById('fotoInput').addEventListener('change', function(){
+ const file = this.files[0];
+ if(!file) return;
+ const reader = new FileReader();
+ reader.onload = function(e){
+ const img = document.getElementById('fotoImg');
+ const placeholder = document.getElementById('fotoPlaceholder');
+ img.src = e.target.result;
+ img.style.display = 'block';
+ placeholder.style.display = 'none';
+ // salva foto em base64
+ try{ localStorage.setItem('paulorenk_foto', e.target.result); } catch(ex){}
+ mostrarToast(' Foto atualizada!');
+ };
+ reader.readAsDataURL(file);
+});
+
+// ==============================
+// SALVAR / CARREGAR
+// ==============================
+function salvarTudo(exibirToast = true){
+ const dados = {};
+ EDITAVEIS.forEach(id => {
+ const el = document.getElementById(id);
+ if(el) dados[id] = el.innerHTML;
+ });
+ try {
+ localStorage.setItem('paulorenk_site', JSON.stringify(dados));
+ if(exibirToast) mostrarToast(' Alterações salvas!');
+ } catch(e){
+ mostrarToast(' Erro ao salvar. Verifique as permissões do navegador.');
+ }
+}
+
+function carregarDados(){
+ try {
+ const dados = JSON.parse(localStorage.getItem('paulorenk_site') || '{}');
+ Object.entries(dados).forEach(([id, val]) => {
+ const el = document.getElementById(id);
+ if(el) el.innerHTML = val;
+ });
+ // foto
+ const foto = localStorage.getItem('paulorenk_foto');
+ if(foto){
+ const img = document.getElementById('fotoImg');
+ img.src = foto;
+ img.style.display = 'block';
+ document.getElementById('fotoPlaceholder').style.display = 'none';
+ }
+ } catch(e){}
+}
+
+// ==============================
+// TOAST
+// ==============================
+function mostrarToast(msg){
+ const t = document.getElementById('toast');
+ t.textContent = msg;
+ t.classList.add('show');
+ setTimeout(()=>t.classList.remove('show'), 3800);
+}
+
+// ==============================
+// NAV MOBILE
+// ==============================
+function toggleNav(){
+ const toggle = document.getElementById('navToggle');
+ const menu = document.getElementById('navMenu');
+ toggle.classList.toggle('aberto');
+ menu.classList.toggle('aberto');
+}
+// Fecha menu ao clicar em link
+document.querySelectorAll('#navMenu a').forEach(a => {
+ a.addEventListener('click', () => {
+ document.getElementById('navToggle').classList.remove('aberto');
+ document.getElementById('navMenu').classList.remove('aberto');
+ });
+});
+
+// ==============================
+// INIT
+// ==============================
+carregarDados();
+
+// ==============================
+// WHATSAPP BUTTONS
+// ==============================
+function abrirWhatsApp(){
+ var url = 'https://wa.me/5511943870101?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20aula%20particular%20de%20matem%C3%A1tica%20com%20o%20Professor%20Paulo.';
+ var win = window.open(url, '_blank');
+ if(!win){ window.location.href = url; }
+}
+document.addEventListener('DOMContentLoaded', function(){
+ var b1 = document.getElementById('btnAgendar');
+ if(b1) b1.addEventListener('click', abrirWhatsApp);
+ var b2 = document.getElementById('btnAgendeTopo');
+ if(b2) b2.addEventListener('click', abrirWhatsApp);
+});
+
+</script>
+</body>
+</html>
