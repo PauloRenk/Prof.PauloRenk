@@ -1,0 +1,173 @@
+{
+  "_leia_me": "Edite apenas os textos entre aspas, a direita dos dois pontos. Nao apague aspas, virgulas, colchetes nem chaves.",
+  "topo": {
+    "selo": "Aulas individuais e turmas particulares",
+    "titulo_nome": "Paulo Renk",
+    "titulo_frase": "Matemática que transforma",
+    "subtitulo": "Doutor em Educação Matemática com vasta experiência no Ensino Básico em colégios privados da grande São Paulo. Atendimento individual ou em turmas.",
+    "destaques": [
+      "Aulas individuais ou em grupo",
+      "Concurso Público",
+      "ENEM · FUVEST · MACK",
+      "Olimpíadas de Matemática"
+    ]
+  },
+  "sobre": {
+    "titulo": "Quem é o Prof. Paulo Renk?",
+    "paragrafo_1": "Doutor em Educação Matemática pela UNIAN (2024), com Tese na área de Formação de Professores no estudo do Pensamento Computacional. Mestrado também em Educação Matemática, com Dissertação na área de Ensino e Aprendizagem em Matemática e suas Tecnologias, no estudo de Funções por meio de um software dinâmico. Com especialização em Educação Especial e Inclusiva e experiência no atendimento cotidiano de alunos incluídos em sala de aula.",
+    "paragrafo_2": "Bacharel em Engenharia Civil e Licenciado em Matemática com mais de 35 anos de experiência, sendo os últimos anos dedicados integralmente ao ensino de Matemática em colégios reconhecidos de São Paulo, com atuação na graduação e na pós-graduação de professores. Atuei no Colégio Agostiniano São José por 5 anos, no Colégio Nobilis no pré-vestibular e como professor de pós-graduação no CENAED por 8 anos.",
+    "formacao": [
+      "Doutorado em Educação Matemática. UNIAN (2024)",
+      "Licenciatura em Matemática. FALC (2019)",
+      "Mestrado em Educação Matemática. UNIAN (2016)",
+      "Especialização em Educação Especial e Inclusiva",
+      "Engenharia Civil. UNIBAN (2001)"
+    ],
+    "numeros": [
+      {
+        "valor": "Dr.",
+        "legenda": "Educação Matemática"
+      },
+      {
+        "valor": "35+",
+        "legenda": "Anos de experiência"
+      },
+      {
+        "valor": "5+",
+        "legenda": "Anos no Agostiniano"
+      },
+      {
+        "valor": "8+",
+        "legenda": "Anos na pós-graduação"
+      }
+    ]
+  },
+  "servicos": {
+    "titulo": "O que ofereço",
+    "subtitulo": "Atendimento exclusivo em Matemática com material próprio, metodologia personalizada e suporte em todas as etapas de ensino.",
+    "reforco": {
+      "titulo": "Aula de Reforço Escolar",
+      "texto": "Acompanhamento contínuo com o uso do próprio material usado no colégio, complementado por meio de um material didático próprio e exercícios direcionados para quem quer manter o ritmo ou recuperar o aprendizado perdido.",
+      "anos_finais_titulo": "Anos Finais",
+      "anos_finais": "6º ao 9º ano dos Anos Finais do Ensino Fundamental: proposta com base sólida nas cinco unidades temáticas de Matemática trazidas na BNCC: Números, Álgebra, Geometria, Grandezas e Medidas, e Probabilidade e Estatística. Foco em dar continuidade ao pensamento algébrico e estatístico construído nos Anos Iniciais.",
+      "medio_titulo": "Ensino Médio",
+      "medio": "1º ao 3º ano do Ensino Médio: proposta com base sólida nas cinco Áreas e Eixos Integrados de Matemática e suas Tecnologias trazidos na BNCC: Aritmética, Álgebra, Geometria (Plana, Espacial e Analítica), Estatística e Probabilidade e Matemática Financeira. Foco no aprofundamento, consolidação e aplicação dos conceitos em contextos reais, sociais e tecnológicos."
+    },
+    "pre_prova": {
+      "titulo": "Pré-prova & Recuperação",
+      "texto": "Apoio focado em resultados rápidos, olhando para os conceitos e exercícios na véspera de avaliações ou durante períodos de recuperação. Trabalharemos por meio da revisão dos tópicos cruciais do conteúdo, esclarecimento de dúvidas e resolução de exercícios usando modelo de provas anteriores e suas variantes, para dar segurança e destravar o raciocínio."
+    },
+    "vestibulares": {
+      "titulo": "Preparatórios para Vestibulares",
+      "texto": "Para cada destino, faço o levantamento dos conteúdos envolvidos e preparo material específico para aquela prova. Sem conteúdo desperdiçado.",
+      "instituicoes": [
+        {
+          "nome": "ENEM",
+          "descricao": "Tudo em Matemática e suas Tecnologias"
+        },
+        {
+          "nome": "FUVEST",
+          "descricao": "USP, alto nível, conteúdo aprofundado"
+        },
+        {
+          "nome": "Mackenzie",
+          "descricao": "Preparação alinhada ao perfil e exigências da prova do Mackenzie."
+        },
+        {
+          "nome": "FEI",
+          "descricao": "Preparação alinhada ao perfil e exigências da prova da FEI."
+        },
+        {
+          "nome": "Fund. ABC",
+          "descricao": "Conteúdo alinhado ao edital específico."
+        },
+        {
+          "nome": "USCS",
+          "descricao": "Conteúdo alinhado ao edital específico"
+        },
+        {
+          "nome": "Mauá",
+          "descricao": "Preparação alinhada ao perfil e exigências da prova da Mauá."
+        },
+        {
+          "nome": "PUC",
+          "descricao": "Preparação alinhada ao perfil e exigências da prova da PUC"
+        },
+        {
+          "nome": "Outras Universidades",
+          "descricao": "Qualquer vestibular ou processo seletivo: basta informar que montamos um plano."
+        }
+      ]
+    },
+    "concursos_olimpiadas": {
+      "titulo": "Preparatório para Concursos Públicos & Olimpíadas",
+      "texto": "Preparação séria para quem quer conquistar uma vaga em concurso público ou se destacar nas olimpíadas de Matemática. Conteúdo sob medida para cada edital ou competição. Raciocínio Lógico, Matemática Financeira e Técnicas de Resolução de Problemas de alto nível.",
+      "olimpiadas_titulo": "Olimpíadas de Matemática",
+      "olimpiadas": "OBMEP, OBM e demais competições. Iniciante ao avançado com treino de Técnicas de Resolução de Problemas.",
+      "concurso_titulo": "Concurso Público",
+      "concurso": "Preparação completa em Matemática e Raciocínio Lógico para quem mira uma vaga no serviço público. Conteúdo 100% alinhado ao edital."
+    },
+    "atendimento_especializado": {
+      "titulo": "Atendimento Educacional Especializado",
+      "texto": "Aprendizado no ritmo do aluno, com material adaptado, acompanhamento próximo e suporte específico para provas e questões sob demanda.",
+      "anos_finais_titulo": "Anos Finais",
+      "anos_finais": "Material reforçado e metodologia adaptada para alunos do 6º ao 9º ano com necessidades específicas de aprendizagem.",
+      "medio_titulo": "Ensino Médio",
+      "medio": "Suporte especializado com abordagem individualizada para alunos do Ensino Médio que precisam de atenção além do padrão."
+    },
+    "ensino_superior": {
+      "titulo": "Ensino Superior: Engenharias",
+      "texto": "Atendimento a alunos de graduação nas disciplinas de Cálculo, Álgebra Linear e Matemática Aplicada."
+    }
+  },
+  "depoimentos": {
+    "titulo": "O que dizem meus alunos",
+    "subtitulo": "Resultados reais de quem passou pelas minhas aulas",
+    "lista": [
+      {
+        "texto": "Meu filho estava reprovando em matemática no 2º ano do ensino médio. Em 4 meses com o Prof. Paulo Renk, ele tirou 8,5 na prova final. Recomendo com os olhos fechados!",
+        "nome": "Maria Lúcia",
+        "descricao": "Mãe de aluno, São Paulo"
+      },
+      {
+        "texto": "Passei na UNICAMP depois de 2 anos tentando! O Prof. Paulo tem um jeito de explicar que finalmente fez tudo fazer sentido pra mim. Método incrível.",
+        "nome": "Gabriel Souza",
+        "descricao": "Estudante, aprovado na UNICAMP"
+      },
+      {
+        "texto": "Contratamos o Prof. Paulo para um treinamento em análise de dados para nossa equipe de 12 pessoas. Excelente didática, conteúdo prático e muita segurança no que ensina.",
+        "nome": "Rafael Costa",
+        "descricao": "Gerente de RH, empresa de tecnologia"
+      }
+    ]
+  },
+  "contato": {
+    "titulo": "Vamos conversar?",
+    "subtitulo": "Aula experimental gratuita de 30 minutos para novos alunos. Entre em contato!",
+    "subtitulo_caixa": "Informações de contato",
+    "descricao": "Atendo presencialmente em São Paulo e online para todo o Brasil. Respondo em até 24 horas.",
+    "whatsapp_texto": "WhatsApp: (11) 94387-0101",
+    "email": "professorrenk@gmail.com",
+    "instagram_texto": "@professor.renk_math",
+    "tiktok_texto": "@professor.renk_math",
+    "linkedin_texto": "LinkedIn: Paulo Rogério Renk",
+    "lattes_texto": "Currículo Lattes",
+    "horario": "Seg a Sex: 7h30 às 21h00 | Sábado: 7h30 às 14h00",
+    "local": "São Paulo, SP. Atendimento online e presencial"
+  },
+  "links": {
+    "whatsapp_numero": "5511943870101",
+    "whatsapp_mensagem": "Olá, gostaria de agendar uma aula particular de matemática com o Professor Paulo.",
+    "email": "professorrenk@gmail.com",
+    "instagram": "https://instagram.com/professor.renk_math",
+    "tiktok": "https://tiktok.com/@professor.renk_math",
+    "linkedin": "https://br.linkedin.com/in/paulo-rog%C3%A9rio-renk-8a2861b9",
+    "lattes": "http://lattes.cnpq.br/5580522778966273",
+    "youtube": "https://youtube.com/@paulorenk"
+  },
+  "rodape": {
+    "nome": "Prof. Paulo Renk",
+    "subtitulo": "Matemática & Educação",
+    "copyright": "© 2025 · Todos os direitos reservados"
+  }
+}

@@ -200,7 +200,6 @@ body.modo-edicao-ativo [contenteditable="true"]:empty::before{content:'Clique pa
 body.modo-edicao-ativo .hero-foto{cursor:pointer}
 body.modo-edicao-ativo .hero-foto:hover{border-color:#fff;opacity:0.9}
 body.modo-edicao-ativo .foto-hint{display:block}
-#fotoInput{display:none}
 
 /* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;align-items:center;justify-content:center}
@@ -217,8 +216,6 @@ body.modo-edicao-ativo .foto-hint{display:block}
 .btn-cancel{background:none;border:none;color:var(--muted);font-size:0.82rem;margin-top:0.75rem;cursor:pointer;width:100%;font-family:'Inter',sans-serif}
 
 /* TOAST */
-.toast{position:fixed;bottom:2rem;right:2rem;background:var(--verde-escuro);color:#fff;padding:0.9rem 1.5rem;border-radius:10px;font-size:0.85rem;z-index:2000;transform:translateY(100px);opacity:0;transition:all 0.3s;box-shadow:0 4px 20px rgba(0,0,0,0.25);font-family:'Inter',sans-serif;max-width:320px;line-height:1.5}
-.toast.show{transform:translateY(0);opacity:1}
 
 /* SOCIAL FLOAT (barra lateral esquerda) */
 .social-float{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:200;display:flex;flex-direction:column;gap:0;border-radius:12px 0 0 12px;overflow:hidden;box-shadow:-3px 3px 18px rgba(0,0,0,0.22)}
@@ -335,36 +332,27 @@ body.modo-edicao-ativo .foto-hint{display:block}
 </head>
 <body>
 
-<!-- INPUT FOTO (oculto) -->
-<input type="file" id="fotoInput" accept="image/*">
-
 <!-- BARRA SOCIAL FLUTUANTE -->
 <div class="social-float">
- <a class="sf-wpp" href="https://wa.me/5511943870101" target="_blank" rel="noopener" title="WhatsApp">
+ <a class="sf-wpp" href="https://wa.me/5511943870101" data-link="whatsapp" target="_blank" rel="noopener" title="WhatsApp">
  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
  </a>
- <a class="sf-linkedin" href="https://br.linkedin.com/in/paulo-rog%C3%A9rio-renk-8a2861b9" target="_blank" rel="noopener" title="LinkedIn">
+ <a class="sf-linkedin" href="https://br.linkedin.com/in/paulo-rog%C3%A9rio-renk-8a2861b9" data-link="linkedin" target="_blank" rel="noopener" title="LinkedIn">
  <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#fff"/></svg>
  </a>
- <a class="sf-email" href="mailto:professorrenk@gmail.com" title="E-mail">
+ <a class="sf-email" href="mailto:professorrenk@gmail.com" data-link="email" title="E-mail">
  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
  </a>
- <a class="sf-yt" href="https://youtube.com/@paulorenk" target="_blank" title="YouTube">
+ <a class="sf-yt" href="https://youtube.com/@paulorenk" data-link="youtube" target="_blank" title="YouTube">
  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
  </a>
 </div>
 
 <!-- BANNER MODO EDIÇÃO -->
-<div class="modo-edicao-banner" id="modoBanner">
-Modo de edicao ativo. clique em qualquer texto para editar
- <button class="banner-btn banner-btn-salvar" onclick="salvarTudo()"> Salvar</button>
- <button class="banner-btn banner-btn-preview" onclick="verComoVisitante()"> Ver como visitante</button>
- <button class="banner-btn banner-btn-sair" onclick="sairEdicao()">Sair</button>
-</div>
 
 <!-- NAV -->
 <nav>
- <div class="logo">Prof. Paulo Renk <span>Matemática &amp; Educação</span></div>
+ <div class="logo"><strong style="font:inherit" data-c="rodape.nome">Prof. Paulo Renk</strong> <span data-c="rodape.subtitulo">Matemática &amp; Educação</span></div>
  <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Menu">
  <span></span><span></span><span></span>
  </button>
@@ -373,7 +361,6 @@ Modo de edicao ativo. clique em qualquer texto para editar
  <li><a href="#servicos">Serviços</a></li>
  <li><a href="#depoimentos">Depoimentos</a></li>
  <li><a href="#contato">Contato</a></li>
- <li><a class="btn-admin" onclick="abrirLogin()"> Admin</a></li>
  </ul>
  <button class="btn-agende" id="btnAgendeTopo">Agende sua aula</button>
 </nav>
@@ -381,22 +368,21 @@ Modo de edicao ativo. clique em qualquer texto para editar
 <!-- HERO -->
 <section class="hero" id="hero">
  <div class="hero-foto-wrap">
- <div class="hero-foto" id="heroFoto" onclick="clicarFoto()">
+ <div class="hero-foto" id="heroFoto">
  <img id="fotoImg" alt="Prof. Paulo Renk" src="foto.jpg" onerror="this.style.display='none';document.getElementById('fotoPlaceholder').style.display='flex'">
  <div class="hero-foto-placeholder" id="fotoPlaceholder" style="display:none">
       </div>
     </div>
-    <span class="foto-hint"> Clique para adicionar foto</span>
  </div>
  <div class="hero-txt">
- <div class="hero-badge">Aulas individuais e turmas particulares</div>
- <h1><span id="heroTitulo">Prof. <em>Paulo Renk</em><br>Matemática que transforma</span></h1>
- <p class="hero-sub" id="heroSub">Doutor em Educação Matemática com vasta experiência no Ensino Básico em colégios privados da grande São Paulo. Atendimento individual ou em turmas.</p>
+ <div class="hero-badge" data-c="topo.selo">Aulas individuais e turmas particulares</div>
+ <h1><span id="heroTitulo">Prof. <em data-c="topo.titulo_nome">Paulo Renk</em><br><span data-c="topo.titulo_frase">Matemática que transforma</span></span></h1>
+ <p class="hero-sub" id="heroSub" data-c="topo.subtitulo">Doutor em Educação Matemática com vasta experiência no Ensino Básico em colégios privados da grande São Paulo. Atendimento individual ou em turmas.</p>
  <div class="tags">
- <span class="tag"> Aulas individuais ou em grupo</span>
- <span class="tag"> Concurso Público</span>
- <span class="tag"> ENEM · FUVEST · MACK</span>
- <span class="tag"> Olimpíadas de Matemática</span>
+ <span class="tag" data-c="topo.destaques.0"> Aulas individuais ou em grupo</span>
+ <span class="tag" data-c="topo.destaques.1"> Concurso Público</span>
+ <span class="tag" data-c="topo.destaques.2"> ENEM · FUVEST · MACK</span>
+ <span class="tag" data-c="topo.destaques.3"> Olimpíadas de Matemática</span>
  </div>
  </div>
 </section>
@@ -406,22 +392,22 @@ Modo de edicao ativo. clique em qualquer texto para editar
  <div class="container">
  <div class="sobre-grid">
  <div class="sobre-txt">
- <h2 id="sobreTitulo">Quem é o Prof. Paulo Renk?</h2>
- <p id="sobreP1">Doutor em Educação Matemática pela UNIAN (2024), com Tese na área de Formação de Professores no estudo do Pensamento Computacional. Mestrado também em Educação Matemática, com Dissertação na área de Ensino e Aprendizagem em Matemática e suas Tecnologias, no estudo de Funções por meio de um software dinâmico. Com especialização em Educação Especial e Inclusiva e experiência no atendimento cotidiano de alunos incluídos em sala de aula.</p>
- <p id="sobreP2">Bacharel em Engenharia Civil e Licenciado em Matemática com mais de 35 anos de experiência, sendo os últimos anos dedicados integralmente ao ensino de Matemática em colégios reconhecidos de São Paulo, com atuação na graduação e na pós-graduação de professores. Atuei no Colégio Agostiniano São José por 5 anos, no Colégio Nobilis no pré-vestibular e como professor de pós-graduação no CENAED por 8 anos.</p>
+ <h2 id="sobreTitulo" data-c="sobre.titulo">Quem é o Prof. Paulo Renk?</h2>
+ <p id="sobreP1" data-c="sobre.paragrafo_1">Doutor em Educação Matemática pela UNIAN (2024), com Tese na área de Formação de Professores no estudo do Pensamento Computacional. Mestrado também em Educação Matemática, com Dissertação na área de Ensino e Aprendizagem em Matemática e suas Tecnologias, no estudo de Funções por meio de um software dinâmico. Com especialização em Educação Especial e Inclusiva e experiência no atendimento cotidiano de alunos incluídos em sala de aula.</p>
+ <p id="sobreP2" data-c="sobre.paragrafo_2">Bacharel em Engenharia Civil e Licenciado em Matemática com mais de 35 anos de experiência, sendo os últimos anos dedicados integralmente ao ensino de Matemática em colégios reconhecidos de São Paulo, com atuação na graduação e na pós-graduação de professores. Atuei no Colégio Agostiniano São José por 5 anos, no Colégio Nobilis no pré-vestibular e como professor de pós-graduação no CENAED por 8 anos.</p>
  <div class="credenciais">
- <div class="cred-item"><span id="cred1">Doutorado em Educação Matemática. UNIAN (2024)</span></div>
- <div class="cred-item"><span>Licenciatura em Matemática. FALC (2019)</span></div>
- <div class="cred-item"><span id="cred2">Mestrado em Educação Matemática. UNIAN (2016)</span></div>
- <div class="cred-item"><span id="cred3">Especialização em Educação Especial e Inclusiva</span></div>
- <div class="cred-item"><span id="cred4">Engenharia Civil. UNIBAN (2001)</span></div>
+ <div class="cred-item"><span id="cred1" data-c="sobre.formacao.0">Doutorado em Educação Matemática. UNIAN (2024)</span></div>
+ <div class="cred-item"><span data-c="sobre.formacao.1">Licenciatura em Matemática. FALC (2019)</span></div>
+ <div class="cred-item"><span id="cred2" data-c="sobre.formacao.2">Mestrado em Educação Matemática. UNIAN (2016)</span></div>
+ <div class="cred-item"><span id="cred3" data-c="sobre.formacao.3">Especialização em Educação Especial e Inclusiva</span></div>
+ <div class="cred-item"><span id="cred4" data-c="sobre.formacao.4">Engenharia Civil. UNIBAN (2001)</span></div>
  </div>
  </div>
  <div class="nums">
- <div class="num-card"><div class="n" id="n1">Dr.</div><div class="l">Educação Matemática</div></div>
- <div class="num-card"><div class="n" id="n2">35+</div><div class="l">Anos de experiência</div></div>
- <div class="num-card"><div class="n" id="n3">5+</div><div class="l">Anos no Agostiniano</div></div>
- <div class="num-card"><div class="n" id="n4">8+</div><div class="l">Anos na pós-graduação</div></div>
+ <div class="num-card"><div class="n" id="n1" data-c="sobre.numeros.0.valor">Dr.</div><div class="l" data-c="sobre.numeros.0.legenda">Educação Matemática</div></div>
+ <div class="num-card"><div class="n" id="n2" data-c="sobre.numeros.1.valor">35+</div><div class="l" data-c="sobre.numeros.1.legenda">Anos de experiência</div></div>
+ <div class="num-card"><div class="n" id="n3" data-c="sobre.numeros.2.valor">5+</div><div class="l" data-c="sobre.numeros.2.legenda">Anos no Agostiniano</div></div>
+ <div class="num-card"><div class="n" id="n4" data-c="sobre.numeros.3.valor">8+</div><div class="l" data-c="sobre.numeros.3.legenda">Anos na pós-graduação</div></div>
  </div>
  </div>
  </div>
@@ -431,8 +417,8 @@ Modo de edicao ativo. clique em qualquer texto para editar
 <section id="servicos">
  <div class="container">
  <div class="sec-titulo">
- <h2 id="servTitulo">O que ofereço</h2>
- <p id="servSub">Atendimento exclusivo em Matemática com material próprio, metodologia personalizada e suporte em todas as etapas de ensino.</p>
+ <h2 id="servTitulo" data-c="servicos.titulo">O que ofereço</h2>
+ <p id="servSub" data-c="servicos.subtitulo">Atendimento exclusivo em Matemática com material próprio, metodologia personalizada e suporte em todas as etapas de ensino.</p>
  <div class="linha"></div>
  </div>
 
@@ -441,18 +427,18 @@ Modo de edicao ativo. clique em qualquer texto para editar
  <div class="serv-grupo-header">
  
  <div>
- <h3>Aula de Reforço Escolar</h3>
- <p>Acompanhamento contínuo com o uso do próprio material usado no colégio, complementado por meio de um material didático próprio e exercícios direcionados para quem quer manter o ritmo ou recuperar o aprendizado perdido.</p>
+ <h3 data-c="servicos.reforco.titulo">Aula de Reforço Escolar</h3>
+ <p data-c="servicos.reforco.texto">Acompanhamento contínuo com o uso do próprio material usado no colégio, complementado por meio de um material didático próprio e exercícios direcionados para quem quer manter o ritmo ou recuperar o aprendizado perdido.</p>
  </div>
  </div>
  <div class="serv-sub-grid">
  <div class="serv-sub-card">
- <span class="serv-sub-nivel">Anos Finais</span>
- <p>6º ao 9º ano dos Anos Finais do Ensino Fundamental: proposta com base sólida nas cinco unidades temáticas de Matemática trazidas na BNCC: Números, Álgebra, Geometria, Grandezas e Medidas, e Probabilidade e Estatística. Foco em dar continuidade ao pensamento algébrico e estatístico construído nos Anos Iniciais.</p>
+ <span class="serv-sub-nivel" data-c="servicos.reforco.anos_finais_titulo">Anos Finais</span>
+ <p data-c="servicos.reforco.anos_finais">6º ao 9º ano dos Anos Finais do Ensino Fundamental: proposta com base sólida nas cinco unidades temáticas de Matemática trazidas na BNCC: Números, Álgebra, Geometria, Grandezas e Medidas, e Probabilidade e Estatística. Foco em dar continuidade ao pensamento algébrico e estatístico construído nos Anos Iniciais.</p>
  </div>
  <div class="serv-sub-card">
- <span class="serv-sub-nivel">Ensino Médio</span>
- <p>1º ao 3º ano do Ensino Médio: proposta com base sólida nas cinco Áreas e Eixos Integrados de Matemática e suas Tecnologias trazidos na BNCC: Aritmética, Álgebra, Geometria (Plana, Espacial e Analítica), Estatística e Probabilidade e Matemática Financeira. Foco no aprofundamento, consolidação e aplicação dos conceitos em contextos reais, sociais e tecnológicos.</p>
+ <span class="serv-sub-nivel" data-c="servicos.reforco.medio_titulo">Ensino Médio</span>
+ <p data-c="servicos.reforco.medio">1º ao 3º ano do Ensino Médio: proposta com base sólida nas cinco Áreas e Eixos Integrados de Matemática e suas Tecnologias trazidos na BNCC: Aritmética, Álgebra, Geometria (Plana, Espacial e Analítica), Estatística e Probabilidade e Matemática Financeira. Foco no aprofundamento, consolidação e aplicação dos conceitos em contextos reais, sociais e tecnológicos.</p>
  </div>
  </div>
  </div>
@@ -462,8 +448,8 @@ Modo de edicao ativo. clique em qualquer texto para editar
  <div class="serv-grupo-header no-sub">
  
  <div>
- <h3>Pré-prova &amp; Recuperação</h3>
- <p>Apoio focado em resultados rápidos, olhando para os conceitos e exercícios na véspera de avaliações ou durante períodos de recuperação. Trabalharemos por meio da revisão dos tópicos cruciais do conteúdo, esclarecimento de dúvidas e resolução de exercícios usando modelo de provas anteriores e suas variantes, para dar segurança e destravar o raciocínio.</p>
+ <h3 data-c="servicos.pre_prova.titulo">Pré-prova &amp; Recuperação</h3>
+ <p data-c="servicos.pre_prova.texto">Apoio focado em resultados rápidos, olhando para os conceitos e exercícios na véspera de avaliações ou durante períodos de recuperação. Trabalharemos por meio da revisão dos tópicos cruciais do conteúdo, esclarecimento de dúvidas e resolução de exercícios usando modelo de provas anteriores e suas variantes, para dar segurança e destravar o raciocínio.</p>
  </div>
  </div>
  </div>
@@ -473,55 +459,55 @@ Modo de edicao ativo. clique em qualquer texto para editar
  <div class="serv-grupo-header">
  
  <div>
- <h3>Preparatórios para Vestibulares</h3>
- <p>Para cada destino, faço o levantamento dos conteúdos envolvidos e preparo material específico para aquela prova. Sem conteúdo desperdiçado.</p>
+ <h3 data-c="servicos.vestibulares.titulo">Preparatórios para Vestibulares</h3>
+ <p data-c="servicos.vestibulares.texto">Para cada destino, faço o levantamento dos conteúdos envolvidos e preparo material específico para aquela prova. Sem conteúdo desperdiçado.</p>
  </div>
  </div>
  <div class="serv-vest-grid">
  <div class="serv-vest-card serv-vest-destaque">
  <div class="vest-logo">E</div>
- <strong>ENEM</strong>
- <span>Tudo em Matemática e suas Tecnologias</span>
+ <strong data-c="servicos.vestibulares.instituicoes.0.nome">ENEM</strong>
+ <span data-c="servicos.vestibulares.instituicoes.0.descricao">Tudo em Matemática e suas Tecnologias</span>
  </div>
  <div class="serv-vest-card serv-vest-destaque">
  <div class="vest-logo">F</div>
- <strong>FUVEST</strong>
- <span>USP, alto nível, conteúdo aprofundado</span>
+ <strong data-c="servicos.vestibulares.instituicoes.1.nome">FUVEST</strong>
+ <span data-c="servicos.vestibulares.instituicoes.1.descricao">USP, alto nível, conteúdo aprofundado</span>
  </div>
  <div class="serv-vest-card">
  <div class="vest-logo">M</div>
- <strong>Mackenzie</strong>
- <span>Preparação alinhada ao perfil e exigências da prova do Mackenzie.</span>
+ <strong data-c="servicos.vestibulares.instituicoes.2.nome">Mackenzie</strong>
+ <span data-c="servicos.vestibulares.instituicoes.2.descricao">Preparação alinhada ao perfil e exigências da prova do Mackenzie.</span>
  </div>
  <div class="serv-vest-card">
  <div class="vest-logo">F</div>
- <strong>FEI</strong>
- <span>Preparação alinhada ao perfil e exigências da prova da FEI.</span>
+ <strong data-c="servicos.vestibulares.instituicoes.3.nome">FEI</strong>
+ <span data-c="servicos.vestibulares.instituicoes.3.descricao">Preparação alinhada ao perfil e exigências da prova da FEI.</span>
  </div>
  <div class="serv-vest-card">
  <div class="vest-logo">A</div>
- <strong>Fund. ABC</strong>
- <span>Conteúdo alinhado ao edital específico.</span>
+ <strong data-c="servicos.vestibulares.instituicoes.4.nome">Fund. ABC</strong>
+ <span data-c="servicos.vestibulares.instituicoes.4.descricao">Conteúdo alinhado ao edital específico.</span>
  </div>
  <div class="serv-vest-card">
  <div class="vest-logo">U</div>
- <strong>USCS</strong>
- <span>Conteúdo alinhado ao edital específico</span>
+ <strong data-c="servicos.vestibulares.instituicoes.5.nome">USCS</strong>
+ <span data-c="servicos.vestibulares.instituicoes.5.descricao">Conteúdo alinhado ao edital específico</span>
  </div>
  <div class="serv-vest-card">
  <div class="vest-logo">M</div>
- <strong>Mauá</strong>
- <span>Preparação alinhada ao perfil e exigências da prova da Mauá.</span>
+ <strong data-c="servicos.vestibulares.instituicoes.6.nome">Mauá</strong>
+ <span data-c="servicos.vestibulares.instituicoes.6.descricao">Preparação alinhada ao perfil e exigências da prova da Mauá.</span>
  </div>
  <div class="serv-vest-card">
  <div class="vest-logo">P</div>
- <strong>PUC</strong>
- <span>Preparação alinhada ao perfil e exigências da prova da PUC</span>
+ <strong data-c="servicos.vestibulares.instituicoes.7.nome">PUC</strong>
+ <span data-c="servicos.vestibulares.instituicoes.7.descricao">Preparação alinhada ao perfil e exigências da prova da PUC</span>
  </div>
  <div class="serv-vest-card serv-vest-wide">
  <div class="vest-logo">+</div>
- <strong>Outras Universidades</strong>
- <span>Qualquer vestibular ou processo seletivo: basta informar que montamos um plano.</span>
+ <strong data-c="servicos.vestibulares.instituicoes.8.nome">Outras Universidades</strong>
+ <span data-c="servicos.vestibulares.instituicoes.8.descricao">Qualquer vestibular ou processo seletivo: basta informar que montamos um plano.</span>
  </div>
  </div>
  </div>
@@ -531,18 +517,18 @@ Modo de edicao ativo. clique em qualquer texto para editar
  <div class="serv-grupo-header">
  
  <div>
- <h3>Preparatório para Concursos Públicos &amp; Olimpíadas</h3>
- <p>Preparação séria para quem quer conquistar uma vaga em concurso público ou se destacar nas olimpíadas de Matemática. Conteúdo sob medida para cada edital ou competição. Raciocínio Lógico, Matemática Financeira e Técnicas de Resolução de Problemas de alto nível.</p>
+ <h3 data-c="servicos.concursos_olimpiadas.titulo">Preparatório para Concursos Públicos &amp; Olimpíadas</h3>
+ <p data-c="servicos.concursos_olimpiadas.texto">Preparação séria para quem quer conquistar uma vaga em concurso público ou se destacar nas olimpíadas de Matemática. Conteúdo sob medida para cada edital ou competição. Raciocínio Lógico, Matemática Financeira e Técnicas de Resolução de Problemas de alto nível.</p>
  </div>
  </div>
  <div class="serv-sub-grid">
  <div class="serv-sub-card">
- <span class="serv-sub-nivel">Olimpíadas de Matemática</span>
- <p>OBMEP, OBM e demais competições. Iniciante ao avançado com treino de Técnicas de Resolução de Problemas.</p>
+ <span class="serv-sub-nivel" data-c="servicos.concursos_olimpiadas.olimpiadas_titulo">Olimpíadas de Matemática</span>
+ <p data-c="servicos.concursos_olimpiadas.olimpiadas">OBMEP, OBM e demais competições. Iniciante ao avançado com treino de Técnicas de Resolução de Problemas.</p>
  </div>
  <div class="serv-sub-card serv-sub-card-destaque">
- <span class="serv-sub-nivel">Concurso Público</span>
- <p>Preparação completa em Matemática e Raciocínio Lógico para quem mira uma vaga no serviço público. Conteúdo 100% alinhado ao edital.</p>
+ <span class="serv-sub-nivel" data-c="servicos.concursos_olimpiadas.concurso_titulo">Concurso Público</span>
+ <p data-c="servicos.concursos_olimpiadas.concurso">Preparação completa em Matemática e Raciocínio Lógico para quem mira uma vaga no serviço público. Conteúdo 100% alinhado ao edital.</p>
  </div>
  </div>
  </div>
@@ -552,25 +538,25 @@ Modo de edicao ativo. clique em qualquer texto para editar
  <div class="serv-grupo-header">
  
  <div>
- <h3>Atendimento Educacional Especializado</h3>
- <p>Aprendizado no ritmo do aluno, com material adaptado, acompanhamento próximo e suporte específico para provas e questões sob demanda.</p>
+ <h3 data-c="servicos.atendimento_especializado.titulo">Atendimento Educacional Especializado</h3>
+ <p data-c="servicos.atendimento_especializado.texto">Aprendizado no ritmo do aluno, com material adaptado, acompanhamento próximo e suporte específico para provas e questões sob demanda.</p>
  </div>
  </div>
  <div class="serv-sub-grid">
  <div class="serv-sub-card">
- <span class="serv-sub-nivel">Anos Finais</span>
- <p>Material reforçado e metodologia adaptada para alunos do 6º ao 9º ano com necessidades específicas de aprendizagem.</p>
+ <span class="serv-sub-nivel" data-c="servicos.atendimento_especializado.anos_finais_titulo">Anos Finais</span>
+ <p data-c="servicos.atendimento_especializado.anos_finais">Material reforçado e metodologia adaptada para alunos do 6º ao 9º ano com necessidades específicas de aprendizagem.</p>
  </div>
  <div class="serv-sub-card">
- <span class="serv-sub-nivel">Ensino Médio</span>
- <p>Suporte especializado com abordagem individualizada para alunos do Ensino Médio que precisam de atenção além do padrão.</p>
+ <span class="serv-sub-nivel" data-c="servicos.atendimento_especializado.medio_titulo">Ensino Médio</span>
+ <p data-c="servicos.atendimento_especializado.medio">Suporte especializado com abordagem individualizada para alunos do Ensino Médio que precisam de atenção além do padrão.</p>
  </div>
  </div>
  </div>
 
  <!-- NOTA FUTURA -->
  <div class="serv-futuro">
- <p><strong>Ensino Superior: Engenharias</strong> &nbsp; Atendimento a alunos de graduação nas disciplinas de Cálculo, Álgebra Linear e Matemática Aplicada.</p>
+ <p><strong data-c="servicos.ensino_superior.titulo">Ensino Superior: Engenharias</strong> &nbsp; <span data-c="servicos.ensino_superior.texto">Atendimento a alunos de graduação nas disciplinas de Cálculo, Álgebra Linear e Matemática Aplicada.</span></p>
  </div>
 
  </div>
@@ -580,25 +566,25 @@ Modo de edicao ativo. clique em qualquer texto para editar
 <section class="depoimentos" id="depoimentos">
  <div class="container">
  <div class="sec-titulo">
- <h2>O que dizem meus alunos</h2>
- <p>Resultados reais de quem passou pelas minhas aulas</p>
+ <h2 data-c="depoimentos.titulo">O que dizem meus alunos</h2>
+ <p data-c="depoimentos.subtitulo">Resultados reais de quem passou pelas minhas aulas</p>
  <div class="linha"></div>
  </div>
  <div class="dep-grid">
  <div class="dep-card">
  <div class="estrelas">★★★★★</div>
- <p class="dep-texto" id="dep1t">"Meu filho estava reprovando em matemática no 2º ano do ensino médio. Em 4 meses com o Prof. Paulo Renk, ele tirou 8,5 na prova final. Recomendo com os olhos fechados!"</p>
- <div class="dep-autor"><div class="dep-av">ML</div><div><div class="dep-nome" id="dep1n">Maria Lúcia</div><div class="dep-role">Mãe de aluno, São Paulo</div></div></div>
+ <p class="dep-texto" id="dep1t" data-c="depoimentos.lista.0.texto" data-aspas="1">"Meu filho estava reprovando em matemática no 2º ano do ensino médio. Em 4 meses com o Prof. Paulo Renk, ele tirou 8,5 na prova final. Recomendo com os olhos fechados!"</p>
+ <div class="dep-autor"><div class="dep-av" data-av="depoimentos.lista.0.nome">ML</div><div><div class="dep-nome" id="dep1n" data-c="depoimentos.lista.0.nome">Maria Lúcia</div><div class="dep-role" data-c="depoimentos.lista.0.descricao">Mãe de aluno, São Paulo</div></div></div>
  </div>
  <div class="dep-card">
  <div class="estrelas">★★★★★</div>
- <p class="dep-texto" id="dep2t">"Passei na UNICAMP depois de 2 anos tentando! O Prof. Paulo tem um jeito de explicar que finalmente fez tudo fazer sentido pra mim. Método incrível."</p>
- <div class="dep-autor"><div class="dep-av">GS</div><div><div class="dep-nome" id="dep2n">Gabriel Souza</div><div class="dep-role">Estudante, aprovado na UNICAMP</div></div></div>
+ <p class="dep-texto" id="dep2t" data-c="depoimentos.lista.1.texto" data-aspas="1">"Passei na UNICAMP depois de 2 anos tentando! O Prof. Paulo tem um jeito de explicar que finalmente fez tudo fazer sentido pra mim. Método incrível."</p>
+ <div class="dep-autor"><div class="dep-av" data-av="depoimentos.lista.1.nome">GS</div><div><div class="dep-nome" id="dep2n" data-c="depoimentos.lista.1.nome">Gabriel Souza</div><div class="dep-role" data-c="depoimentos.lista.1.descricao">Estudante, aprovado na UNICAMP</div></div></div>
  </div>
  <div class="dep-card">
  <div class="estrelas">★★★★★</div>
- <p class="dep-texto" id="dep3t">"Contratamos o Prof. Paulo para um treinamento em análise de dados para nossa equipe de 12 pessoas. Excelente didática, conteúdo prático e muita segurança no que ensina."</p>
- <div class="dep-autor"><div class="dep-av">RC</div><div><div class="dep-nome" id="dep3n">Rafael Costa</div><div class="dep-role">Gerente de RH, empresa de tecnologia</div></div></div>
+ <p class="dep-texto" id="dep3t" data-c="depoimentos.lista.2.texto" data-aspas="1">"Contratamos o Prof. Paulo para um treinamento em análise de dados para nossa equipe de 12 pessoas. Excelente didática, conteúdo prático e muita segurança no que ensina."</p>
+ <div class="dep-autor"><div class="dep-av" data-av="depoimentos.lista.2.nome">RC</div><div><div class="dep-nome" id="dep3n" data-c="depoimentos.lista.2.nome">Rafael Costa</div><div class="dep-role" data-c="depoimentos.lista.2.descricao">Gerente de RH, empresa de tecnologia</div></div></div>
  </div>
  </div>
  </div>
@@ -608,32 +594,32 @@ Modo de edicao ativo. clique em qualquer texto para editar
 <section class="contato" id="contato">
  <div class="container">
  <div class="sec-titulo">
- <h2 id="contTitulo">Vamos conversar?</h2>
- <p id="contSub">Aula experimental gratuita de 30 minutos para novos alunos. Entre em contato!</p>
+ <h2 id="contTitulo" data-c="contato.titulo">Vamos conversar?</h2>
+ <p id="contSub" data-c="contato.subtitulo">Aula experimental gratuita de 30 minutos para novos alunos. Entre em contato!</p>
  <div class="linha"></div>
  </div>
  <div class="contato-grid">
  <div class="contato-info">
- <h3>Informações de contato</h3>
- <p id="contDesc">Atendo presencialmente em São Paulo e online para todo o Brasil. Respondo em até 24 horas.</p>
+ <h3 data-c="contato.subtitulo_caixa">Informações de contato</h3>
+ <p id="contDesc" data-c="contato.descricao">Atendo presencialmente em São Paulo e online para todo o Brasil. Respondo em até 24 horas.</p>
  <div class="info-items">
-          <div class="info-item"><div class="info-icon-txt">WA</div><span id="contTel">WhatsApp: (11) 94387-0101</span></div>
-          <div class="info-item"><div class="info-icon-txt">@</div><span id="contEmail">professorrenk@gmail.com</span></div>
-          <div class="info-item"><div class="info-icon-txt">IG</div><span>@professor.renk_math</span></div>
-          <div class="info-item"><div class="info-icon-txt">TK</div><span>@professor.renk_math</span></div>
-          <div class="info-item"><div class="info-icon-txt">in</div><a href="https://br.linkedin.com/in/paulo-rog%C3%A9rio-renk-8a2861b9" target="_blank" rel="noopener" style="color:var(--texto);text-decoration:none">LinkedIn: Paulo Rogério Renk</a></div>
-          <div class="info-item"><div class="info-icon-txt">CV</div><a href="http://lattes.cnpq.br/5580522778966273" target="_blank" rel="noopener" style="color:var(--texto);text-decoration:none">Currículo Lattes</a></div>
-          <div class="info-item"><div class="info-icon-txt">H</div><span id="contHorario">Seg a Sex: 7h30 às 21h00 &nbsp;|&nbsp; Sábado: 7h30 às 14h00</span></div>
-          <div class="info-item"><div class="info-icon-txt">SP</div><span id="contLocal">São Paulo, SP. Atendimento online e presencial</span></div>
+          <div class="info-item"><div class="info-icon-txt">WA</div><span id="contTel" data-c="contato.whatsapp_texto">WhatsApp: (11) 94387-0101</span></div>
+          <div class="info-item"><div class="info-icon-txt">@</div><span id="contEmail" data-c="contato.email">professorrenk@gmail.com</span></div>
+          <div class="info-item"><div class="info-icon-txt">IG</div><span data-c="contato.instagram_texto">@professor.renk_math</span></div>
+          <div class="info-item"><div class="info-icon-txt">TK</div><span data-c="contato.tiktok_texto">@professor.renk_math</span></div>
+          <div class="info-item"><div class="info-icon-txt">in</div><a href="https://br.linkedin.com/in/paulo-rog%C3%A9rio-renk-8a2861b9" data-link="linkedin" target="_blank" rel="noopener" style="color:var(--texto);text-decoration:none" data-c="contato.linkedin_texto">LinkedIn: Paulo Rogério Renk</a></div>
+          <div class="info-item"><div class="info-icon-txt">CV</div><a href="http://lattes.cnpq.br/5580522778966273" data-link="lattes" target="_blank" rel="noopener" style="color:var(--texto);text-decoration:none" data-c="contato.lattes_texto">Currículo Lattes</a></div>
+          <div class="info-item"><div class="info-icon-txt">H</div><span id="contHorario" data-c="contato.horario">Seg a Sex: 7h30 às 21h00 | Sábado: 7h30 às 14h00</span></div>
+          <div class="info-item"><div class="info-icon-txt">SP</div><span id="contLocal" data-c="contato.local">São Paulo, SP. Atendimento online e presencial</span></div>
         </div>
         <div class="social-icons" style="margin-top:1.5rem;flex-wrap:wrap">
-          <a class="si-wpp" href="https://wa.me/5511943870101" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#fff"/></svg> WhatsApp</a>
-          <a class="si-email" href="mailto:professorrenk@gmail.com"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="#fff"/></svg> E-mail</a>
-          <a class="si-linkedin" href="https://br.linkedin.com/in/paulo-rog%C3%A9rio-renk-8a2861b9" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#fff"/></svg> LinkedIn</a>
-          <a class="si-insta" href="https://instagram.com/professor.renk_math" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="#fff"/></svg> Instagram</a>
-          <a class="si-tiktok" href="https://tiktok.com/@professor.renk_math" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z" fill="#fff"/></svg> TikTok</a>
-          <a class="si-yt" href="https://youtube.com/@paulorenk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#fff"/></svg> YouTube</a>
-          <a class="si-lattes" href="http://lattes.cnpq.br/5580522778966273" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="#fff"/></svg> Lattes</a>
+          <a class="si-wpp" href="https://wa.me/5511943870101" data-link="whatsapp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#fff"/></svg> WhatsApp</a>
+          <a class="si-email" href="mailto:professorrenk@gmail.com" data-link="email"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="#fff"/></svg> E-mail</a>
+          <a class="si-linkedin" href="https://br.linkedin.com/in/paulo-rog%C3%A9rio-renk-8a2861b9" data-link="linkedin" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#fff"/></svg> LinkedIn</a>
+          <a class="si-insta" href="https://instagram.com/professor.renk_math" data-link="instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="#fff"/></svg> Instagram</a>
+          <a class="si-tiktok" href="https://tiktok.com/@professor.renk_math" data-link="tiktok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z" fill="#fff"/></svg> TikTok</a>
+          <a class="si-yt" href="https://youtube.com/@paulorenk" data-link="youtube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#fff"/></svg> YouTube</a>
+          <a class="si-lattes" href="http://lattes.cnpq.br/5580522778966273" data-link="lattes" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="#fff"/></svg> Lattes</a>
         </div>
  </div>
  <div>
@@ -648,7 +634,7 @@ Modo de edicao ativo. clique em qualquer texto para editar
  </select>
  </div>
  <div class="form-group"><label>Mensagem</label><textarea placeholder="Me conte o que você precisa.."></textarea></div>
- <button class="form-submit" onclick="window.open('https://wa.me/5511943870101?text=Olá%2C%20Prof.%20Paulo%20Renk!%20Gostaria%20de%20agendar%20uma%20aula.','_blank')">Falar no WhatsApp →</button>
+ <button class="form-submit" onclick="abrirWhatsApp()">Falar no WhatsApp →</button>
  </div>
  </div>
  </div>
@@ -656,228 +642,92 @@ Modo de edicao ativo. clique em qualquer texto para editar
 
 <!-- FOOTER -->
 <footer>
- <strong>Prof. Paulo Renk</strong>. Matemática &amp; Educação<br>
+ <strong data-c="rodape.nome">Prof. Paulo Renk</strong> · <span data-c="rodape.subtitulo">Matemática &amp; Educação</span><br>
  <div class="footer-social">
- <a class="sf-wpp" href="https://wa.me/5511943870101" target="_blank" rel="noopener" title="WhatsApp" style="background:#25D366">
+ <a class="sf-wpp" href="https://wa.me/5511943870101" data-link="whatsapp" target="_blank" rel="noopener" title="WhatsApp" style="background:#25D366">
  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="#fff"/></svg>
  </a>
- <a class="sf-linkedin" href="https://br.linkedin.com/in/paulo-rog%C3%A9rio-renk-8a2861b9" target="_blank" rel="noopener" title="LinkedIn" style="background:#0077B5">
+ <a class="sf-linkedin" href="https://br.linkedin.com/in/paulo-rog%C3%A9rio-renk-8a2861b9" data-link="linkedin" target="_blank" rel="noopener" title="LinkedIn" style="background:#0077B5">
  <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#fff"/></svg>
  </a>
- <a class="sf-email" href="mailto:professorrenk@gmail.com" title="E-mail" style="background:#2d4a35">
+ <a class="sf-email" href="mailto:professorrenk@gmail.com" data-link="email" title="E-mail" style="background:#2d4a35">
  <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="#fff"/></svg>
  </a>
- <a class="sf-yt" href="https://youtube.com/@paulorenk" target="_blank" title="YouTube" style="background:#FF0000">
+ <a class="sf-yt" href="https://youtube.com/@paulorenk" data-link="youtube" target="_blank" title="YouTube" style="background:#FF0000">
  <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#fff"/></svg>
  </a>
  </div>
- <span style="margin-top:0.75rem;display:block">© 2025 · Todos os direitos reservados</span>
+ <span style="margin-top:0.75rem;display:block" data-c="rodape.copyright">© 2025 · Todos os direitos reservados</span>
 </footer>
 
-<!-- MODAL LOGIN -->
-<div class="modal-overlay" id="loginModal">
- <div class="login-modal">
- <div class="lock-icon"></div>
- <h2>Área do Professor</h2>
- <p>Digite a senha para editar o site</p>
- <input type="password" id="senhaInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')verificarSenha()">
- <div class="login-erro" id="loginErro">Senha incorreta. Tente novamente.</div>
- <button class="btn-entrar" onclick="verificarSenha()">Entrar</button>
- <button class="btn-cancel" onclick="fecharLogin()">Cancelar</button>
- </div>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
-
 <script>
-// ==============================
-// CONFIGURAÇÃO. altere aqui
-// ==============================
-const SENHA_HASH = "d54aa6dcd47c9d8c2419f867d0525aa7ebefd2fdb165258643e4d0f7cca5716f";
-const SENHA_SAL = "renk-site-v1:";
+// Valores de reserva: usados se o conteudo.json nao carregar.
+var LINKS = {
+  whatsapp_numero: '5511943870101',
+  whatsapp_mensagem: 'Olá, gostaria de agendar uma aula particular de matemática com o Professor Paulo.'
+};
 
-const EDITAVEIS = [
- 'heroTitulo','heroSub',
- 'sobreTitulo','sobreP1','sobreP2',
- 'cred1','cred2','cred3','cred4',
- 'n1','n2','n3','n4',
- 'servTitulo','servSub',
- 's1t','s1d','s2t','s2d','s3t','s3d',
- 's4t','s4d','s5t','s5d','s6t','s6d',
- 'dep1t','dep1n','dep2t','dep2n','dep3t','dep3n',
- 'contTitulo','contSub','contDesc',
- 'contTel','contEmail','contLocal','contHorario'
-];
+function urlWhats(comMensagem){
+  var u = 'https://wa.me/' + LINKS.whatsapp_numero;
+  if(comMensagem) u += '?text=' + encodeURIComponent(LINKS.whatsapp_mensagem);
+  return u;
+}
+function abrirWhatsApp(){
+  var url = urlWhats(true);
+  var win = window.open(url, '_blank');
+  if(!win){ window.location.href = url; }
+}
 
-// ==============================
-// LOGIN
-// ==============================
-function abrirLogin(){
- document.getElementById('loginModal').classList.add('ativo');
- document.getElementById('senhaInput').value = '';
- document.getElementById('loginErro').style.display = 'none';
- setTimeout(()=>document.getElementById('senhaInput').focus(), 100);
+// Menu mobile
+function toggleNav(){
+  document.getElementById('navToggle').classList.toggle('aberto');
+  document.getElementById('navMenu').classList.toggle('aberto');
 }
-function fecharLogin(){
- document.getElementById('loginModal').classList.remove('ativo');
+document.querySelectorAll('#navMenu a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.getElementById('navToggle').classList.remove('aberto');
+    document.getElementById('navMenu').classList.remove('aberto');
+  });
+});
+
+var btnTopo = document.getElementById('btnAgendeTopo');
+if(btnTopo) btnTopo.addEventListener('click', abrirWhatsApp);
+
+// Conteudo editavel (conteudo.json)
+function pegar(obj, caminho){
+  return caminho.split('.').reduce(function(o, k){ return (o == null) ? undefined : o[k]; }, obj);
 }
-async function sha256(txt){
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(txt));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+function iniciais(nome){
+  var p = nome.trim().split(/\s+/);
+  if(p.length === 1) return p[0].charAt(0).toUpperCase();
+  return (p[0].charAt(0) + p[p.length - 1].charAt(0)).toUpperCase();
 }
-async function verificarSenha(){
-  const v = document.getElementById('senhaInput').value;
-  let ok = false;
-  try{ ok = (await sha256(SENHA_SAL + v)) === SENHA_HASH; }catch(e){ ok = false; }
-  if(ok){ fecharLogin(); ativarEdicao(); }
-  else {
-    document.getElementById('loginErro').style.display = 'block';
-    document.getElementById('senhaInput').value = '';
-    document.getElementById('senhaInput').focus();
+function aplicarConteudo(d){
+  document.querySelectorAll('[data-c]').forEach(function(el){
+    var v = pegar(d, el.getAttribute('data-c'));
+    if(typeof v === 'string' && v.trim() !== ''){
+      el.textContent = el.hasAttribute('data-aspas') ? '"' + v + '"' : v;
+    }
+  });
+  document.querySelectorAll('[data-av]').forEach(function(el){
+    var v = pegar(d, el.getAttribute('data-av'));
+    if(typeof v === 'string' && v.trim() !== '') el.textContent = iniciais(v);
+  });
+  if(d.links){
+    if(d.links.whatsapp_numero)   LINKS.whatsapp_numero = String(d.links.whatsapp_numero).replace(/\D/g, '');
+    if(d.links.whatsapp_mensagem) LINKS.whatsapp_mensagem = d.links.whatsapp_mensagem;
+    document.querySelectorAll('[data-link]').forEach(function(a){
+      var k = a.getAttribute('data-link');
+      if(k === 'whatsapp') a.href = urlWhats(false);
+      else if(k === 'email' && d.links.email) a.href = 'mailto:' + d.links.email;
+      else if(typeof d.links[k] === 'string' && d.links[k].trim() !== '') a.href = d.links[k];
+    });
   }
 }
-document.getElementById('loginModal').addEventListener('click', function(e){
- if(e.target === this) fecharLogin();
-});
-
-// ==============================
-// EDIÇÃO
-// ==============================
-function ativarEdicao(){
- document.getElementById('modoBanner').classList.add('ativo');
- document.body.classList.add('modo-edicao-ativo');
- EDITAVEIS.forEach(id => {
- const el = document.getElementById(id);
- if(el) el.contentEditable = 'true';
- });
- mostrarToast(' Edição ativa! Clique em qualquer texto para editar.\nFoto: clique na imagem do hero.');
-}
-
-function sairEdicao(){
- document.getElementById('modoBanner').classList.remove('ativo');
- document.body.classList.remove('modo-edicao-ativo');
- EDITAVEIS.forEach(id => {
- const el = document.getElementById(id);
- if(el) el.contentEditable = 'false';
- });
- mostrarToast('Modo de edição encerrado.');
-}
-
-// "Ver como visitante": salva, sai da edição e rola ao topo
-function verComoVisitante(){
- salvarTudo(false);
- sairEdicao();
- window.scrollTo({top:0, behavior:'smooth'});
- mostrarToast(' Visualizando como visitante. Clique em Admin para voltar a editar.');
-}
-
-// ==============================
-// FOTO
-// ==============================
-function clicarFoto(){
- if(!document.body.classList.contains('modo-edicao-ativo')) return;
- document.getElementById('fotoInput').click();
-}
-document.getElementById('fotoInput').addEventListener('change', function(){
- const file = this.files[0];
- if(!file) return;
- const reader = new FileReader();
- reader.onload = function(e){
- const img = document.getElementById('fotoImg');
- const placeholder = document.getElementById('fotoPlaceholder');
- img.src = e.target.result;
- img.style.display = 'block';
- placeholder.style.display = 'none';
- // salva foto em base64
- try{ localStorage.setItem('paulorenk_foto', e.target.result); } catch(ex){}
- mostrarToast(' Foto atualizada!');
- };
- reader.readAsDataURL(file);
-});
-
-// ==============================
-// SALVAR / CARREGAR
-// ==============================
-function salvarTudo(exibirToast = true){
- const dados = {};
- EDITAVEIS.forEach(id => {
- const el = document.getElementById(id);
- if(el) dados[id] = el.innerHTML;
- });
- try {
- localStorage.setItem('paulorenk_site', JSON.stringify(dados));
- if(exibirToast) mostrarToast(' Alterações salvas!');
- } catch(e){
- mostrarToast(' Erro ao salvar. Verifique as permissões do navegador.');
- }
-}
-
-function carregarDados(){
- try {
- const dados = JSON.parse(localStorage.getItem('paulorenk_site') || '{}');
- Object.entries(dados).forEach(([id, val]) => {
- const el = document.getElementById(id);
- if(el) el.innerHTML = val;
- });
- // foto
- const foto = localStorage.getItem('paulorenk_foto');
- if(foto){
- const img = document.getElementById('fotoImg');
- img.src = foto;
- img.style.display = 'block';
- document.getElementById('fotoPlaceholder').style.display = 'none';
- }
- } catch(e){}
-}
-
-// ==============================
-// TOAST
-// ==============================
-function mostrarToast(msg){
- const t = document.getElementById('toast');
- t.textContent = msg;
- t.classList.add('show');
- setTimeout(()=>t.classList.remove('show'), 3800);
-}
-
-// ==============================
-// NAV MOBILE
-// ==============================
-function toggleNav(){
- const toggle = document.getElementById('navToggle');
- const menu = document.getElementById('navMenu');
- toggle.classList.toggle('aberto');
- menu.classList.toggle('aberto');
-}
-// Fecha menu ao clicar em link
-document.querySelectorAll('#navMenu a').forEach(a => {
- a.addEventListener('click', () => {
- document.getElementById('navToggle').classList.remove('aberto');
- document.getElementById('navMenu').classList.remove('aberto');
- });
-});
-
-// ==============================
-// INIT
-// ==============================
-carregarDados();
-
-// ==============================
-// WHATSAPP BUTTONS
-// ==============================
-function abrirWhatsApp(){
- var url = 'https://wa.me/5511943870101?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20aula%20particular%20de%20matem%C3%A1tica%20com%20o%20Professor%20Paulo.';
- var win = window.open(url, '_blank');
- if(!win){ window.location.href = url; }
-}
-document.addEventListener('DOMContentLoaded', function(){
- var b1 = document.getElementById('btnAgendar');
- if(b1) b1.addEventListener('click', abrirWhatsApp);
- var b2 = document.getElementById('btnAgendeTopo');
- if(b2) b2.addEventListener('click', abrirWhatsApp);
-});
-
+fetch('conteudo.json', {cache: 'no-cache'})
+  .then(function(r){ if(!r.ok) throw new Error('sem conteudo'); return r.json(); })
+  .then(aplicarConteudo)
+  .catch(function(){ /* mantem o texto que ja esta no HTML */ });
 </script>
 </body>
 </html>
