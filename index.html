@@ -3,7 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prof. Paulo Renk — Matemática & Educação</title>
+<title>Professor Paulo Renk | Aulas Particulares de Matemática em São Paulo</title>
+<meta name="description" content="Aulas particulares de Matemática com o Prof. Dr. Paulo Renk. Reforço escolar, Ensino Médio, vestibulares (ENEM, FUVEST, Mackenzie, FEI, Mauá, PUC), concursos públicos e olimpíadas. Atendimento individual ou em turmas.">
+<meta name="author" content="Paulo Rogério Renk">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Professor Paulo Renk | Aulas Particulares de Matemática">
+<meta property="og:description" content="Doutor em Educação Matemática. Reforço escolar, vestibulares, concursos públicos e olimpíadas. Atendimento individual ou em turmas.">
+<meta property="og:image" content="foto.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Paulo Rogério Renk",
+  "alternateName": "Professor Paulo Renk",
+  "jobTitle": "Professor de Matemática",
+  "description": "Doutor em Educação Matemática com aulas particulares de Matemática para Ensino Fundamental, Ensino Médio, vestibulares, concursos públicos e olimpíadas.",
+  "email": "mailto:professorrenk@gmail.com",
+  "telephone": "+55 11 94387-0101",
+  "image": "foto.jpg",
+  "knowsAbout": ["Matemática", "Educação Matemática", "Preparatório para vestibulares", "Concursos públicos", "Olimpíadas de Matemática"],
+  "alumniOf": {"@type": "CollegeOrUniversity", "name": "UNIAN"},
+  "sameAs": [
+    "https://br.linkedin.com/in/paulo-rog%C3%A9rio-renk-8a2861b9",
+    "http://lattes.cnpq.br/5580522778966273",
+    "https://instagram.com/professor.renk_math",
+    "https://tiktok.com/@professor.renk_math"
+  ]
+}
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -664,7 +694,8 @@ Modo de edicao ativo. clique em qualquer texto para editar
 // ==============================
 // CONFIGURAÇÃO. altere aqui
 // ==============================
-const SENHA = "paulo2025";
+const SENHA_HASH = "d54aa6dcd47c9d8c2419f867d0525aa7ebefd2fdb165258643e4d0f7cca5716f";
+const SENHA_SAL = "renk-site-v1:";
 
 const EDITAVEIS = [
  'heroTitulo','heroSub',
@@ -691,14 +722,20 @@ function abrirLogin(){
 function fecharLogin(){
  document.getElementById('loginModal').classList.remove('ativo');
 }
-function verificarSenha(){
- const v = document.getElementById('senhaInput').value;
- if(v === SENHA){ fecharLogin(); ativarEdicao(); }
- else {
- document.getElementById('loginErro').style.display = 'block';
- document.getElementById('senhaInput').value = '';
- document.getElementById('senhaInput').focus();
- }
+async function sha256(txt){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(txt));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+async function verificarSenha(){
+  const v = document.getElementById('senhaInput').value;
+  let ok = false;
+  try{ ok = (await sha256(SENHA_SAL + v)) === SENHA_HASH; }catch(e){ ok = false; }
+  if(ok){ fecharLogin(); ativarEdicao(); }
+  else {
+    document.getElementById('loginErro').style.display = 'block';
+    document.getElementById('senhaInput').value = '';
+    document.getElementById('senhaInput').focus();
+  }
 }
 document.getElementById('loginModal').addEventListener('click', function(e){
  if(e.target === this) fecharLogin();
